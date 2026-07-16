@@ -352,6 +352,207 @@
   min-width: 280px;
 }
 
+/* ── Parcelas editable table ────────────────────────────── */
+.cfr-parcelas-summary {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cfr-ps-item {
+  flex: 1;
+  min-width: 110px;
+  background: var(--fp-white);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  padding: 0.7rem 0.9rem;
+}
+
+.cfr-ps-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fp-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.cfr-ps-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fp-text);
+  letter-spacing: -0.02em;
+}
+
+.cfr-ps-val.ok   { color: var(--fp-success); }
+.cfr-ps-val.warn { color: var(--fp-warning); }
+.cfr-ps-val.err  { color: var(--fp-danger);  }
+
+.cfr-parcelas-table-wrap {
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  overflow: hidden;
+}
+
+.cfr-parcelas-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.cfr-parcelas-table thead th {
+  background: var(--fp-bg-alt);
+  color: var(--fp-text-sub);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--fp-border);
+  white-space: nowrap;
+}
+
+.cfr-parcelas-table tbody tr {
+  border-bottom: 1px solid var(--fp-border-light);
+  transition: background 0.12s;
+}
+.cfr-parcelas-table tbody tr:last-child { border-bottom: none; }
+.cfr-parcelas-table tbody tr:hover { background: var(--fp-bg-alt); }
+
+.cfr-parcelas-table tfoot tr {
+  background: var(--fp-bg-alt);
+  border-top: 1px solid var(--fp-border);
+}
+
+.cfr-parcelas-table td {
+  padding: 0.5rem 0.85rem;
+  vertical-align: middle;
+}
+
+/* Parcela number badge */
+.cfr-p-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Inline editable inputs */
+.cfr-cell-input {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fp-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--fp-radius-xs);
+  padding: 0.3rem 0.45rem;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s;
+  outline: none;
+}
+
+.cfr-cell-input:hover {
+  border-color: var(--fp-border);
+  background: var(--fp-white);
+}
+
+.cfr-cell-input:focus {
+  border-color: var(--fp-primary);
+  background: var(--fp-white);
+  box-shadow: 0 0 0 3px rgba(13,110,253,.1);
+}
+
+.cfr-cell-input.input-dias {
+  width: 68px;
+  text-align: center;
+}
+
+.cfr-cell-input.input-valor {
+  width: 120px;
+  text-align: right;
+}
+
+.cfr-cell-input.input-data {
+  width: 150px;
+}
+
+/* Valor edited indicator */
+.cfr-cell-input.edited {
+  color: var(--fp-primary);
+}
+
+/* Diff badge on total row */
+.cfr-diff-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  margin-left: 0.5rem;
+}
+
+.cfr-diff-ok   { background: var(--fp-success-soft); color: var(--fp-success); }
+.cfr-diff-warn { background: var(--fp-warning-soft); color: var(--fp-warning); }
+.cfr-diff-err  { background: var(--fp-danger-soft);  color: var(--fp-danger);  }
+
+/* Footer totals */
+.cfr-foot-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fp-text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cfr-foot-total {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--fp-text);
+  letter-spacing: -0.01em;
+}
+
+/* Remove row btn */
+.cfr-rm-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--fp-text-muted);
+  border-radius: var(--fp-radius-xs);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  opacity: 0;
+}
+
+tr:hover .cfr-rm-btn { opacity: 1; }
+
+.cfr-rm-btn:hover {
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+}
+
+/* Hint text */
+.cfr-parcelas-hint {
+  font-size: 0.75rem;
+  color: var(--fp-text-muted);
+  display: flex;
+  align-items: center;
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 991.98px) {
   .cfr-summary-sticky { position: static; }

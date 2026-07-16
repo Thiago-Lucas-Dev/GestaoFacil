@@ -1,15 +1,10 @@
+@push('scripts')
+    @vite('resources/js/modules/contas_pagar/create_contas_pagar')
+@endpush
+
 <x-applayout>
     <main class="fp-main">
         <div class="container-xxl py-4">
-
-            <!-- Breadcrumb + Page Header -->
-            <nav aria-label="breadcrumb" class="mb-2">
-                <ol class="breadcrumb cfr-breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#">Contas a Receber</a></li>
-                    <li class="breadcrumb-item active">Nova Conta</li>
-                </ol>
-            </nav>
 
             <div class="fp-page-header d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
                 <div class="d-flex align-items-center gap-3">
@@ -17,7 +12,7 @@
                         <i class="bi bi-arrow-left"></i>
                     </a>
                     <div>
-                        <h1 class="fp-page-title mb-1">Nova Conta a Receber</h1>
+                        <h1 class="fp-page-title mb-1">Nova Conta a Pagar</h1>
                         <p class="fp-page-subtitle mb-0">
                             <i class="bi bi-arrow-down-circle me-1"></i>
                             Cadastre um novo título a receber
@@ -27,10 +22,6 @@
                 <div class="d-flex align-items-center gap-2">
                     <button class="btn fp-btn-outline-secondary btn-sm d-flex align-items-center gap-1">
                         <i class="bi bi-x-lg"></i> Cancelar
-                    </button>
-                    <button class="btn fp-btn-outline-secondary btn-sm d-flex align-items-center gap-1"
-                        id="saveDraftBtn">
-                        <i class="bi bi-save"></i> Salvar Rascunho
                     </button>
                     <button class="btn fp-btn-primary btn-sm d-flex align-items-center gap-1" id="saveReceberBtn">
                         <i class="bi bi-check-lg"></i> Salvar Conta
@@ -51,8 +42,8 @@
                                 <div class="cfr-section-header">
                                     <div class="cfr-section-icon"><i class="bi bi-receipt"></i></div>
                                     <div>
-                                        <h5 class="fp-section-title mb-1">Dados do Recebimento</h5>
-                                        <p class="fp-section-sub mb-0">Informações principais do título</p>
+                                        <h5 class="fp-section-title mb-1">Dados da Conta</h5>
+                                        <p class="fp-section-sub mb-0">Informações principais da despesa</p>
                                     </div>
                                 </div>
 
@@ -63,8 +54,8 @@
                                             placeholder="Ex: Prestação de Serviços — Contrato #1042" required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="fp-label">Cliente <span class="text-danger">*</span></label>
+                                    <div class="col-md-8">
+                                        <label class="fp-label">Fornecedor <span class="text-danger">*</span></label>
                                         <div class="cfr-client-select">
                                             <select class="form-select fp-input" required>
                                                 <option value="">Selecione o cliente...</option>
@@ -81,7 +72,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label class="fp-label">Categoria <span class="text-danger">*</span></label>
                                         <select class="form-select fp-input" required>
                                             <option value="">Selecione...</option>
@@ -93,42 +84,20 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <label class="fp-label">Valor <span class="text-danger">*</span></label>
-                                        <div class="fp-input-prefix-wrap">
-                                            <span class="fp-input-prefix">R$</span>
-                                            <input type="text" class="form-control fp-input fp-input-prefixed"
-                                                placeholder="0,00" id="valorInput" required />
-                                        </div>
-                                    </div>
+                                    <div class="section-divider"></div>
 
-                                    <div class="col-md-4">
-                                        <label class="fp-label">Data de Emissão</label>
+                                    <div class="col-md-6">
+                                        <label class="fp-label">Data de Geração</label>
                                         <input type="date" class="form-control fp-input" id="emissaoInput" />
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label class="fp-label">Data de Vencimento <span
                                                 class="text-danger">*</span></label>
                                         <input type="date" class="form-control fp-input" id="vencimentoInput"
                                             required />
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="fp-label">Nº do Documento</label>
-                                        <input type="text" class="form-control fp-input" placeholder="Ex: NF-2451" />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="fp-label">Centro de Custo</label>
-                                        <select class="form-select fp-input">
-                                            <option value="">Nenhum</option>
-                                            <option>Comercial</option>
-                                            <option>Tecnologia</option>
-                                            <option>Administrativo</option>
-                                            <option>Marketing</option>
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,13 +110,25 @@
                                         style="background:var(--fp-success-soft);color:var(--fp-success)"><i
                                             class="bi bi-arrow-repeat"></i></div>
                                     <div>
-                                        <h5 class="fp-section-title mb-1">Condições de Recebimento</h5>
+                                        <h5 class="fp-section-title mb-1">Condições de Pagamento</h5>
                                         <p class="fp-section-sub mb-0">Como e quando este título será pago</p>
                                     </div>
                                 </div>
 
-                                <div class="row g-3 mt-3">
-                                    <div class="col-md-6">
+                                <div class="row g-3 mt-2">
+
+                                    <div class="col-md-12">
+                                        <label class="fp-label">Valor <span class="text-danger">*</span></label>
+                                        <div class="fp-input-prefix-wrap">
+                                            <span class="fp-input-prefix">R$</span>
+                                            <input type="text" class="form-control fp-input fp-input-prefixed"
+                                                placeholder="0,00" id="valorInput" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="section-divider"></div>
+
+                                    {{-- <div class="col-md-6">
                                         <label class="fp-label">Forma de Recebimento</label>
                                         <select class="form-select fp-input">
                                             <option>PIX</option>
@@ -164,7 +145,7 @@
                                             <option>Bradesco — C/C 45217-2</option>
                                             <option>Nubank — C/C 38124-1</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
 
                                     <!-- Recorrência toggle -->
                                     <div class="col-12">
@@ -175,8 +156,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-check form-switch cfg-switch">
-                                                <input class="form-check-input" type="checkbox"
-                                                    id="recorrenteSwitch" />
+                                                <input class="form-check-input" type="checkbox" id="recorrenteSwitch" />
                                             </div>
                                         </div>
                                     </div>
@@ -184,8 +164,8 @@
                                     <!-- Recurrence options (hidden by default) -->
                                     <div class="col-12 d-none" id="recorrenciaOptions">
                                         <div class="cfr-recur-box">
-                                            <div class="row g-3">
-                                                <div class="col-md-4">
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-md-12">
                                                     <label class="fp-label">Frequência</label>
                                                     <select class="form-select fp-input">
                                                         <option>Mensal</option>
@@ -194,7 +174,7 @@
                                                         <option>Anual</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-4">
+                                                {{-- <div class="col-md-4">
                                                     <label class="fp-label">Repetir por</label>
                                                     <div class="cfr-input-suffix-wrap">
                                                         <input type="number" class="form-control fp-input"
@@ -205,7 +185,66 @@
                                                 <div class="col-md-4">
                                                     <label class="fp-label">Encerrar em</label>
                                                     <input type="date" class="form-control fp-input" />
+                                                </div> --}}
+                                            </div>
+                                            <div class="row g-3">
+
+                                                <div class="col-12">
+                                                    <label class="fp-label">Término da Recorrência</label>
+
+                                                    <div class="d-flex flex-column gap-3 mt-2">
+
+                                                        <!-- Sem término -->
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="recorrencia_fim" id="recSemFim"
+                                                                value="indefinido" checked>
+
+                                                            <label class="form-check-label" for="recSemFim">
+                                                                Sem término
+                                                            </label>
+                                                        </div>
+
+                                                        <!-- Até uma data -->
+                                                        <div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="recorrencia_fim" id="recData"
+                                                                    value="data">
+
+                                                                <label class="form-check-label" for="recData">
+                                                                    Encerrar em uma data
+                                                                </label>
+                                                            </div>
+
+                                                            <input type="date" class="form-control fp-input"
+                                                                id="recDataFim" disabled>
+                                                        </div>
+
+                                                        <!-- Após X ocorrências -->
+                                                        <div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="recorrencia_fim" id="recOcorrencias"
+                                                                    value="ocorrencias">
+
+                                                                <label class="form-check-label" for="recOcorrencias">
+                                                                    Encerrar após
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="cfr-input-suffix-wrap">
+                                                                <input type="number" class="form-control fp-input"
+                                                                    id="recQtdOcorrencias" min="1"
+                                                                    value="12" disabled>
+
+                                                                <span class="cfr-input-suffix">ocorrências</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +263,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 d-none" id="parcelaOptions">
+                                    {{-- <div class="col-12 d-none" id="parcelaOptions">
                                         <div class="cfr-recur-box">
                                             <div class="row g-3 align-items-end">
                                                 <div class="col-md-4">
@@ -250,6 +289,78 @@
                                                 </div>
                                             </div>
                                             <div class="mt-3" id="parcelasPreview"></div>
+                                        </div>
+                                    </div> --}}
+
+                                    <div class="col-12 d-none" id="parcelaOptions">
+                                        <div class="cfr-recur-box">
+
+                                            <!-- Controls row -->
+                                            <div class="row g-3 align-items-end">
+                                                <div class="col-md-4">
+                                                    <label class="fp-label">Nº de Parcelas</label>
+                                                    <input type="number" class="form-control fp-input"
+                                                        value="3" min="2" max="48"
+                                                        id="numParcelas" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="fp-label">Intervalo Padrão</label>
+                                                    <select class="form-select fp-input" id="intervaloParcelas">
+                                                        <option value="30">30 dias</option>
+                                                        <option value="15">15 dias</option>
+                                                        <option value="60">60 dias</option>
+                                                        <option value="90">90 dias</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="button"
+                                                        class="btn fp-btn-primary w-100 d-flex align-items-center justify-content-center gap-1"
+                                                        id="gerarParcelasBtn">
+                                                        <i class="bi bi-magic"></i> Gerar Parcelas
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Editable parcelas table -->
+                                            <div class="d-none mt-4" id="parcelasWrap">
+
+                                                <!-- Summary bar -->
+                                                <div class="cfr-parcelas-summary" id="parcelasSummary"></div>
+
+                                                <!-- Table -->
+                                                <div class="cfr-parcelas-table-wrap mt-3">
+                                                    <table class="cfr-parcelas-table" id="parcelasTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width:52px">Parc.</th>
+                                                                <th style="width:80px">Dias</th>
+                                                                <th>Data de Vencimento</th>
+                                                                <th>Valor (R$)</th>
+                                                                <th style="width:36px"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="parcelasBody"></tbody>
+                                                        <tfoot id="parcelasFoot"></tfoot>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Actions -->
+                                                <div
+                                                    class="d-flex align-items-center justify-content-between mt-3 flex-wrap gap-2">
+                                                    <span class="cfr-parcelas-hint">
+                                                        <i class="bi bi-pencil me-1"></i>
+                                                        Edite dias, data ou valor diretamente na tabela — os cálculos
+                                                        são feitos na hora.
+                                                    </span>
+                                                    <button type="button"
+                                                        class="btn fp-btn-outline-secondary btn-sm d-flex align-items-center gap-1"
+                                                        id="addParcelaBtn">
+                                                        <i class="bi bi-plus-lg"></i> Adicionar Parcela
+                                                    </button>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
 
@@ -344,60 +455,6 @@
 
                             </div>
                         </div>
-
-                        <!-- Configurações extras -->
-                        <div class="fp-card mb-4">
-                            <div class="fp-card-body p-4">
-                                <h5 class="fp-section-title mb-3">Configurações</h5>
-
-                                <div class="d-flex flex-column gap-3">
-                                    <div class="cfr-mini-toggle">
-                                        <div>
-                                            <div class="cfg-toggle-title">Notificar vencimento</div>
-                                            <div class="cfg-toggle-sub">Alertar 3 dias antes</div>
-                                        </div>
-                                        <div class="form-check form-switch cfg-switch">
-                                            <input class="form-check-input" type="checkbox" checked />
-                                        </div>
-                                    </div>
-                                    <div class="cfr-mini-toggle">
-                                        <div>
-                                            <div class="cfg-toggle-title">Aplicar juros por atraso</div>
-                                            <div class="cfg-toggle-sub">Multa + juros ao mês</div>
-                                        </div>
-                                        <div class="form-check form-switch cfg-switch">
-                                            <input class="form-check-input" type="checkbox" id="jurosSwitch" />
-                                        </div>
-                                    </div>
-
-                                    <div class="d-none" id="jurosFields">
-                                        <div class="row g-2">
-                                            <div class="col-6">
-                                                <label class="fp-label">Multa (%)</label>
-                                                <input type="text" class="form-control fp-input"
-                                                    placeholder="2,00" />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="fp-label">Juros a.m. (%)</label>
-                                                <input type="text" class="form-control fp-input"
-                                                    placeholder="1,00" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dica -->
-                        <div class="cfr-tip-box">
-                            <i class="bi bi-lightbulb"></i>
-                            <div>
-                                <div class="cfr-tip-title">Dica</div>
-                                <div class="cfr-tip-text">Vincule um cliente já cadastrado para manter o histórico
-                                    financeiro organizado e gerar relatórios por cliente.</div>
-                            </div>
-                        </div>
-
                     </div>
                     <!-- ════════ FIM SIDEBAR ════════ -->
 

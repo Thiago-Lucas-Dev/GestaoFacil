@@ -1,0 +1,872 @@
+/* ============================================================
+   FINANCEIRO PRO — configuracoes.css
+   ============================================================ */
+
+/* ── Sidebar nav ────────────────────────────────────────── */
+.cfg-sidenav {
+    position: sticky;
+    top: calc(var(--fp-topbar-h) + 1.5rem);
+}
+
+.cfg-sidenav-body {
+    padding: 0.75rem;
+}
+
+.cfg-nav-group {
+    margin-bottom: 1.25rem;
+}
+
+.cfg-nav-group:last-child {
+    margin-bottom: 0;
+}
+
+.cfg-nav-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fp-text-muted);
+    padding: 0 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.cfg-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--fp-radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--fp-text-sub);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+    margin-bottom: 2px;
+    position: relative;
+}
+
+.cfg-nav-item:hover {
+    background: var(--fp-bg-alt);
+    color: var(--fp-text);
+}
+
+.cfg-nav-item.active {
+    background: var(--fp-primary-soft);
+    color: var(--fp-primary);
+    font-weight: 600;
+}
+
+.cfg-nav-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--fp-radius-xs);
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    background: transparent;
+    transition: background 0.15s;
+}
+
+.cfg-nav-item.active .cfg-nav-icon {
+    background: rgba(13, 110, 253, .12);
+    color: var(--fp-primary);
+}
+
+.cfg-nav-badge {
+    margin-left: auto;
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: var(--fp-border);
+    color: var(--fp-text-sub);
+    border-radius: 20px;
+    padding: 0.1rem 0.45rem;
+    line-height: 1.5;
+}
+
+.cfg-nav-item.active .cfg-nav-badge {
+    background: rgba(13, 110, 253, .15);
+    color: var(--fp-primary);
+}
+
+/* ── Tabs ───────────────────────────────────────────────── */
+.cfg-tab {
+    display: none;
+}
+
+.cfg-tab.active {
+    display: block;
+    animation: fadeInUp .3s ease both;
+}
+
+/* ── Bank cards ─────────────────────────────────────────── */
+.cfg-bank-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    background: var(--fp-white);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    flex-wrap: wrap;
+}
+
+.cfg-bank-card:hover {
+    box-shadow: var(--fp-shadow);
+    border-color: var(--fp-border);
+}
+
+.cfg-bank-card.cfg-bank-active {
+    border-color: var(--fp-primary);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .08);
+}
+
+.cfg-bank-stripe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.cfg-bank-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--fp-radius-sm);
+    background: var(--fp-bg-alt);
+    border: 1px solid var(--fp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--fp-primary);
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.cfg-bank-info {
+    flex: 1;
+    min-width: 160px;
+}
+
+.cfg-bank-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fp-text);
+    line-height: 1.3;
+}
+
+.cfg-bank-detail {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+    margin-top: 0.15rem;
+}
+
+.cfg-bank-balance {
+    text-align: right;
+}
+
+.cfg-bank-balance-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--fp-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cfg-bank-balance-val {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fp-text);
+    letter-spacing: -0.02em;
+}
+
+.cfg-bank-status {
+    flex-shrink: 0;
+}
+
+.cfg-bank-actions {
+    display: flex;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+/* ── Balance summary ────────────────────────────────────── */
+.cfg-balance-summary {
+    background: var(--fp-bg-alt);
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius-sm);
+    padding: 1rem 1.25rem;
+}
+
+.cfg-balance-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cfg-balance-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--fp-text-sub);
+}
+
+.cfg-balance-total {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--fp-text);
+    letter-spacing: -0.02em;
+}
+
+.cfg-balance-sub {
+    font-size: 0.72rem;
+    color: var(--fp-text-muted);
+    margin-top: 0.2rem;
+}
+
+/* ── Method grid ────────────────────────────────────────── */
+.cfg-method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.cfg-method-card {
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    padding: 1.25rem;
+    background: var(--fp-white);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.cfg-method-card:hover {
+    box-shadow: var(--fp-shadow);
+    border-color: var(--fp-primary);
+}
+
+.cfg-method-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--fp-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.cfg-method-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fp-text);
+    line-height: 1.3;
+}
+
+.cfg-method-sub {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+    flex: 1;
+}
+
+.cfg-method-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--fp-border-light);
+}
+
+/* ── Recebimento cards ──────────────────────────────────── */
+.cfg-receb-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    background: var(--fp-white);
+    flex-wrap: wrap;
+    transition: box-shadow 0.2s;
+}
+
+.cfg-receb-card:hover {
+    box-shadow: var(--fp-shadow);
+}
+
+.cfg-receb-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.cfg-receb-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--fp-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.cfg-receb-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fp-text);
+}
+
+.cfg-receb-sub {
+    font-size: 0.72rem;
+    color: var(--fp-text-sub);
+    margin-top: 0.1rem;
+}
+
+.cfg-receb-taxa,
+.cfg-receb-prazo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.cfg-taxa-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fp-text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.cfg-taxa-val {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--fp-text);
+}
+
+.cfg-receb-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+/* ── Categories ─────────────────────────────────────────── */
+.cfg-cat-group {
+    background: var(--fp-bg-alt);
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    padding: 1.25rem;
+    height: 100%;
+}
+
+.cfg-cat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius-sm);
+    background: var(--fp-white);
+    transition: border-color 0.15s;
+}
+
+.cfg-cat-item:hover {
+    border-color: var(--fp-primary);
+}
+
+.cfg-cat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cfg-cat-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--fp-text);
+    flex: 1;
+}
+
+.cfg-cat-count {
+    font-size: 0.72rem;
+    color: var(--fp-text-muted);
+}
+
+/* ── Toggle rows ────────────────────────────────────────── */
+.cfg-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    background: var(--fp-bg-alt);
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius-sm);
+    gap: 1rem;
+}
+
+.cfg-toggle-title {
+    font-size: 0.8375rem;
+    font-weight: 600;
+    color: var(--fp-text);
+    margin-bottom: 0.15rem;
+}
+
+.cfg-toggle-sub {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+}
+
+.cfg-switch .form-check-input {
+    width: 40px;
+    height: 22px;
+    cursor: pointer;
+    background-color: var(--fp-border);
+    border-color: var(--fp-border);
+}
+
+.cfg-switch .form-check-input:checked {
+    background-color: var(--fp-primary);
+    border-color: var(--fp-primary);
+}
+
+.cfg-switch .form-check-input:focus {
+    box-shadow: none;
+}
+
+/* ── Notif rows ─────────────────────────────────────────── */
+.cfg-notif-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--fp-border-light);
+}
+
+.cfg-notif-row:last-child {
+    border-bottom: none;
+}
+
+.cfg-notif-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--fp-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.cfg-notif-info {
+    flex: 1;
+}
+
+.cfg-notif-title {
+    font-size: 0.8375rem;
+    font-weight: 600;
+    color: var(--fp-text);
+    margin-bottom: 0.1rem;
+}
+
+.cfg-notif-sub {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+}
+
+.cfg-notif-channels {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.cfg-channel-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.18rem 0.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--fp-border);
+    color: var(--fp-text-sub);
+    background: var(--fp-bg-alt);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.cfg-channel-tag.active {
+    background: var(--fp-primary-soft);
+    border-color: var(--fp-primary);
+    color: var(--fp-primary);
+}
+
+/* ── User cards ─────────────────────────────────────────── */
+.cfg-user-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    background: var(--fp-white);
+    flex-wrap: wrap;
+    transition: box-shadow 0.2s;
+}
+
+.cfg-user-card:hover {
+    box-shadow: var(--fp-shadow-sm);
+}
+
+.cfg-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.cfg-user-info {
+    flex: 1;
+    min-width: 140px;
+}
+
+.cfg-user-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fp-text);
+}
+
+.cfg-user-email {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+}
+
+.cfg-role-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.22rem 0.6rem;
+    border-radius: 20px;
+}
+
+.cfg-role-admin {
+    background: var(--fp-primary-soft);
+    color: var(--fp-primary);
+}
+
+.cfg-role-manager {
+    background: var(--fp-success-soft);
+    color: var(--fp-success);
+}
+
+.cfg-role-viewer {
+    background: var(--fp-bg-alt);
+    color: var(--fp-text-sub);
+    border: 1px solid var(--fp-border);
+}
+
+/* ── Integrations grid ──────────────────────────────────── */
+.cfg-integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1rem;
+}
+
+.cfg-integration-card {
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: var(--fp-white);
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.cfg-integration-card:hover {
+    box-shadow: var(--fp-shadow);
+}
+
+.cfg-integration-card.connected {
+    border-color: var(--fp-success);
+}
+
+.cfg-int-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--fp-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--fp-border);
+}
+
+.cfg-int-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--fp-text);
+}
+
+.cfg-int-desc {
+    font-size: 0.75rem;
+    color: var(--fp-text-sub);
+    flex: 1;
+}
+
+.cfg-int-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--fp-border-light);
+}
+
+/* ── Logo upload ────────────────────────────────────────── */
+.cfg-logo-upload {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cfg-logo-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--fp-radius);
+    background: var(--fp-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    border: 3px solid var(--fp-border);
+}
+
+/* ── Color picker ───────────────────────────────────────── */
+.cfg-color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.15s;
+    border: 2px solid transparent;
+    display: inline-block;
+}
+
+.cfg-color-dot:hover {
+    transform: scale(1.2);
+}
+
+.cfg-color-dot.selected {
+    border-color: var(--fp-text);
+    box-shadow: 0 0 0 2px var(--fp-white), 0 0 0 4px currentColor;
+    transform: scale(1.1);
+}
+
+/* ── Icon picker ────────────────────────────────────────── */
+.cfg-icon-opt {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--fp-radius-xs);
+    border: 1px solid var(--fp-border);
+    background: var(--fp-bg-alt);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--fp-text-sub);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.cfg-icon-opt:hover,
+.cfg-icon-opt.selected {
+    background: var(--fp-primary-soft);
+    border-color: var(--fp-primary);
+    color: var(--fp-primary);
+}
+
+/* ── Toast ──────────────────────────────────────────────── */
+.fp-toast {
+    background: var(--fp-white);
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius);
+    box-shadow: var(--fp-shadow-lg);
+    font-family: 'Sora', sans-serif;
+    font-size: 0.8375rem;
+    font-weight: 500;
+    min-width: 280px;
+}
+
+/* ── Modal extras ───────────────────────────────────────── */
+.fp-modal-icon {
+    transition: background 0.2s, color 0.2s;
+}
+
+.fp-input-prefix-wrap {
+    position: relative;
+}
+
+.fp-input-prefix {
+    position: absolute;
+    left: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--fp-text-sub);
+    pointer-events: none;
+}
+
+.fp-input-prefixed {
+    padding-left: 2.2rem !important;
+}
+
+.fp-label {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--fp-text);
+    margin-bottom: .4rem;
+    display: block;
+}
+
+.fp-input {
+    font-family: 'Sora', sans-serif;
+    font-size: .8375rem;
+    color: var(--fp-text);
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius-sm);
+    background: var(--fp-bg-alt);
+    padding: .55rem .8rem;
+    transition: border-color .18s, background .18s, box-shadow .18s;
+}
+
+.fp-input:focus {
+    border-color: var(--fp-primary);
+    background: var(--fp-white);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .1);
+    outline: none;
+    color: var(--fp-text);
+}
+
+.fp-input::placeholder {
+    color: var(--fp-text-muted);
+}
+
+.fp-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--fp-border);
+}
+
+.fp-modal-title {
+    font-size: .9375rem;
+    font-weight: 700;
+    color: var(--fp-text);
+    letter-spacing: -.01em;
+}
+
+.fp-modal-sub {
+    font-size: .75rem;
+    color: var(--fp-text-sub);
+}
+
+.fp-modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--fp-border);
+    border-radius: var(--fp-radius-xs);
+    color: var(--fp-text-sub);
+    font-size: .8rem;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.fp-modal-close:hover {
+    background: var(--fp-danger-soft);
+    border-color: var(--fp-danger);
+    color: var(--fp-danger);
+}
+
+.fp-modal-body {
+    padding: 1.5rem;
+}
+
+.fp-modal-footer {
+    padding: 1rem 1.5rem;
+    background: var(--fp-bg-alt);
+    border-top: 1px solid var(--fp-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+}
+
+.fp-modal {
+    border: none;
+    border-radius: var(--fp-radius);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
+    overflow: hidden;
+}
+
+/* ── fp-icon-btn (also used here from style.css via cascade) ── */
+.fp-icon-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--fp-text-muted);
+    border-radius: var(--fp-radius-xs);
+    font-size: .8rem;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+}
+
+.fp-icon-btn:hover {
+    background: var(--fp-bg-alt);
+    color: var(--fp-text);
+}
+
+.fp-icon-btn.fp-icon-danger:hover {
+    background: var(--fp-danger-soft);
+    color: var(--fp-danger);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+    .cfg-sidenav {
+        position: static;
+        margin-bottom: 0;
+    }
+
+    .cfg-bank-card {
+        gap: .75rem;
+    }
+
+    .cfg-receb-taxa,
+    .cfg-receb-prazo {
+        min-width: 60px;
+    }
+}

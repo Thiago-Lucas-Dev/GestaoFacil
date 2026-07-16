@@ -1,0 +1,359 @@
+/* ============================================================
+   FINANCEIRO PRO — conta-receber-form.css
+   ============================================================ */
+
+/* ── Breadcrumb ─────────────────────────────────────────── */
+.cfr-breadcrumb {
+  font-size: 0.78rem;
+  background: transparent;
+  padding: 0;
+}
+.cfr-breadcrumb .breadcrumb-item a {
+  color: var(--fp-text-sub);
+  text-decoration: none;
+  font-weight: 500;
+}
+.cfr-breadcrumb .breadcrumb-item a:hover { color: var(--fp-primary); }
+.cfr-breadcrumb .breadcrumb-item.active { color: var(--fp-text); font-weight: 600; }
+.cfr-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  content: "\F285";
+  font-family: "bootstrap-icons";
+  color: var(--fp-text-muted);
+  font-size: 0.65rem;
+  vertical-align: middle;
+}
+
+/* ── Back button ────────────────────────────────────────── */
+.cfr-back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--fp-radius-sm);
+  border: 1px solid var(--fp-border);
+  background: var(--fp-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fp-text-sub);
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: all 0.18s;
+}
+.cfr-back-btn:hover {
+  background: var(--fp-bg-alt);
+  color: var(--fp-text);
+  border-color: var(--fp-border);
+}
+
+/* ── Section header ─────────────────────────────────────── */
+.cfr-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--fp-border-light);
+}
+
+.cfr-section-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--fp-radius-sm);
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+/* ── Client select with add button ─────────────────────── */
+.cfr-client-select {
+  display: flex;
+  gap: 0.5rem;
+}
+.cfr-client-select select { flex: 1; }
+
+.cfr-add-client {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 1px dashed var(--fp-border);
+  background: var(--fp-bg-alt);
+  border-radius: var(--fp-radius-sm);
+  color: var(--fp-text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.cfr-add-client:hover {
+  border-color: var(--fp-primary);
+  border-style: solid;
+  color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+}
+
+/* ── Recurrence / installment box ──────────────────────── */
+.cfr-recur-box {
+  background: var(--fp-bg-alt);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  padding: 1.1rem;
+  animation: fadeInUp 0.25s ease both;
+}
+
+.cfr-input-suffix-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.cfr-input-suffix-wrap input { padding-right: 3.2rem !important; }
+.cfr-input-suffix {
+  position: absolute;
+  right: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fp-text-muted);
+  pointer-events: none;
+}
+
+/* Parcelas preview table */
+.cfr-parcela-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: var(--fp-white);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-xs);
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+}
+.cfr-parcela-row:last-child { margin-bottom: 0; }
+
+.cfr-parcela-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cfr-parcela-date { flex: 1; color: var(--fp-text-sub); }
+.cfr-parcela-val { font-weight: 700; color: var(--fp-text); }
+
+/* ── Dropzone ───────────────────────────────────────────── */
+.cfr-dropzone {
+  border: 2px dashed var(--fp-border);
+  border-radius: var(--fp-radius);
+  background: var(--fp-bg-alt);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cfr-dropzone:hover,
+.cfr-dropzone.dragover {
+  border-color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+}
+.cfr-dropzone-icon { font-size: 2.2rem; color: var(--fp-text-muted); margin-bottom: 0.6rem; display:block; }
+.cfr-dropzone-title { font-size: 0.85rem; font-weight: 600; color: var(--fp-text); margin-bottom: 0.2rem; }
+.cfr-dropzone-sub { font-size: 0.75rem; color: var(--fp-text-sub); margin: 0; }
+
+.cfr-file-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--fp-bg-alt);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-xs);
+}
+.cfr-file-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--fp-radius-xs);
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.cfr-file-name { font-size: 0.8rem; font-weight: 600; color: var(--fp-text); flex: 1; }
+.cfr-file-size { font-size: 0.72rem; color: var(--fp-text-muted); }
+
+/* ── Summary sidebar ────────────────────────────────────── */
+.cfr-summary-sticky {
+  position: sticky;
+  top: calc(var(--fp-topbar-h) + 1.5rem);
+}
+
+.cfr-summary-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--fp-primary-soft);
+  border-radius: var(--fp-radius-sm);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+.cfr-summary-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fp-primary);
+  opacity: 0.8;
+}
+.cfr-summary-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--fp-primary-dark);
+  letter-spacing: -0.02em;
+}
+
+.cfr-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--fp-border-light);
+}
+.cfr-summary-row:last-of-type { border-bottom: none; }
+
+.cfr-summary-key {
+  font-size: 0.78rem;
+  color: var(--fp-text-sub);
+  font-weight: 500;
+}
+.cfr-summary-val {
+  font-size: 0.8125rem;
+  color: var(--fp-text);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Status options */
+.cfr-status-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cfr-status-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--fp-border);
+  background: var(--fp-white);
+  border-radius: var(--fp-radius-sm);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--fp-text-sub);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+}
+
+.cfr-status-opt:hover {
+  border-color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+}
+
+.cfr-status-opt.active {
+  border-color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+}
+
+.cfr-status-opt[data-status="pago"].active {
+  border-color: var(--fp-success);
+  background: var(--fp-success-soft);
+  color: var(--fp-success);
+}
+.cfr-status-opt[data-status="agendado"].active {
+  border-color: var(--fp-warning);
+  background: var(--fp-warning-soft);
+  color: var(--fp-warning);
+}
+
+/* Mini toggle (sidebar) */
+.cfr-mini-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* ── Tip box ────────────────────────────────────────────── */
+.cfr-tip-box {
+  display: flex;
+  gap: 0.75rem;
+  background: var(--fp-warning-soft);
+  border: 1px solid #FCE9B5;
+  border-radius: var(--fp-radius);
+  padding: 1rem 1.1rem;
+}
+.cfr-tip-box i {
+  font-size: 1.1rem;
+  color: var(--fp-warning);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.cfr-tip-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #8a6500;
+  margin-bottom: 0.2rem;
+}
+.cfr-tip-text {
+  font-size: 0.76rem;
+  color: #8a6500;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* ── Bottom action bar (mobile) ─────────────────────────── */
+.cfr-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--fp-white);
+  border-top: 1px solid var(--fp-border);
+  padding: 0.85rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 1020;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+}
+
+/* ── Toast (shared) ─────────────────────────────────────── */
+.fp-toast {
+  background: var(--fp-white);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius);
+  box-shadow: var(--fp-shadow-lg);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8375rem;
+  font-weight: 500;
+  min-width: 280px;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+  .cfr-summary-sticky { position: static; }
+  .fp-main { padding-bottom: 5rem; }
+}

@@ -1,0 +1,432 @@
+/* ============================================================
+   FINANCEIRO PRO — movimentacoes.css
+   ============================================================ */
+
+/* ── Filter bar ─────────────────────────────────────────── */
+.fp-filter-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--fp-border);
+  flex-shrink: 0;
+}
+
+.fp-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--fp-text-sub);
+  background: transparent;
+  border: 1px solid var(--fp-border);
+  border-radius: 20px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.fp-filter-chip:hover {
+  border-color: var(--fp-primary);
+  color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+}
+
+.fp-filter-chip.fp-chip-active {
+  border-color: var(--fp-primary);
+  color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+  font-weight: 600;
+}
+
+/* ── Select ─────────────────────────────────────────────── */
+.fp-select {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--fp-text-sub);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  background: var(--fp-bg-alt);
+  padding: 0.4rem 2rem 0.4rem 0.7rem;
+  background-size: 12px;
+  transition: border-color 0.18s;
+}
+.fp-select:focus {
+  border-color: var(--fp-primary);
+  box-shadow: 0 0 0 3px rgba(13,110,253,.1);
+  outline: none;
+  background-color: var(--fp-white);
+}
+
+/* ── Table toolbar ──────────────────────────────────────── */
+.fp-table-toolbar {
+  background: var(--fp-white);
+  border-radius: var(--fp-radius) var(--fp-radius) 0 0;
+}
+
+/* ── Sortable headers ───────────────────────────────────── */
+.fp-th-sort {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.fp-th-sort:hover { color: var(--fp-primary); }
+
+.fp-sort-icon {
+  font-size: 0.65rem;
+  color: var(--fp-text-muted);
+  opacity: 0.6;
+}
+.fp-th-sort:hover .fp-sort-icon { opacity: 1; color: var(--fp-primary); }
+
+/* ── Checkbox ───────────────────────────────────────────── */
+.fp-check {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: var(--fp-primary);
+  border-radius: 4px;
+}
+
+/* ── Table row ──────────────────────────────────────────── */
+.fp-tr-selected { background: var(--fp-primary-soft) !important; }
+
+/* Row actions */
+.fp-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+tr:hover .fp-row-actions { opacity: 1; }
+
+.fp-icon-btn {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--fp-text-muted);
+  border-radius: var(--fp-radius-xs);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.fp-icon-btn:hover {
+  background: var(--fp-bg-alt);
+  color: var(--fp-text);
+}
+.fp-icon-btn.fp-icon-danger:hover {
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+}
+
+/* Account chip */
+.fp-account-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--fp-text-sub);
+  white-space: nowrap;
+}
+
+.fp-account-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Bulk actions */
+.fp-bulk-actions { display: flex; }
+.fp-bulk-actions.d-none { display: none !important; }
+
+.fp-btn-danger-outline {
+  background: transparent;
+  border: 1px solid var(--fp-danger);
+  color: var(--fp-danger);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--fp-radius-sm);
+  padding: 0.45rem 0.9rem;
+  transition: background 0.18s;
+}
+.fp-btn-danger-outline:hover {
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+}
+
+/* ── Modal ──────────────────────────────────────────────── */
+.fp-modal {
+  border: none;
+  border-radius: var(--fp-radius);
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+  overflow: hidden;
+}
+
+.fp-modal-dialog { max-width: 580px; }
+
+.fp-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--fp-border);
+  background: var(--fp-white);
+}
+
+.fp-modal-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+  border-radius: var(--fp-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.fp-modal-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--fp-text);
+  letter-spacing: -0.01em;
+}
+
+.fp-modal-sub {
+  font-size: 0.75rem;
+  color: var(--fp-text-sub);
+}
+
+.fp-modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-xs);
+  color: var(--fp-text-sub);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.fp-modal-close:hover {
+  background: var(--fp-danger-soft);
+  border-color: var(--fp-danger);
+  color: var(--fp-danger);
+}
+
+.fp-modal-body {
+  padding: 1.5rem;
+  background: var(--fp-white);
+}
+
+.fp-modal-footer {
+  padding: 1rem 1.5rem;
+  background: var(--fp-bg-alt);
+  border-top: 1px solid var(--fp-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Type toggle */
+.fp-type-toggle {
+  display: flex;
+  background: var(--fp-bg-alt);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  padding: 4px;
+  gap: 4px;
+}
+
+.fp-tt-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  color: var(--fp-text-sub);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.fp-tt-btn[data-type="receita"].fp-tt-active {
+  background: var(--fp-success);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(25,135,84,.3);
+}
+.fp-tt-btn[data-type="despesa"].fp-tt-active {
+  background: var(--fp-danger);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(220,53,69,.3);
+}
+
+/* Form inputs */
+.fp-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fp-text);
+  margin-bottom: 0.4rem;
+  display: block;
+  letter-spacing: 0.01em;
+}
+
+.fp-input {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8375rem;
+  color: var(--fp-text);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-sm);
+  background: var(--fp-bg-alt);
+  padding: 0.55rem 0.8rem;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+.fp-input:focus {
+  border-color: var(--fp-primary);
+  background: var(--fp-white);
+  box-shadow: 0 0 0 3px rgba(13,110,253,.1);
+  outline: none;
+  color: var(--fp-text);
+}
+.fp-input::placeholder { color: var(--fp-text-muted); }
+
+.fp-input-prefix-wrap { position: relative; }
+.fp-input-prefix {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fp-text-sub);
+  pointer-events: none;
+}
+.fp-input-prefixed { padding-left: 2.2rem !important; }
+
+/* ── Dropzone ───────────────────────────────────────────── */
+.fp-dropzone {
+  border: 2px dashed var(--fp-border);
+  border-radius: var(--fp-radius);
+  background: var(--fp-bg-alt);
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.fp-dropzone:hover,
+.fp-dropzone.dragover {
+  border-color: var(--fp-primary);
+  background: var(--fp-primary-soft);
+}
+.fp-dropzone-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.fp-dropzone-icon { font-size: 2.5rem; color: var(--fp-text-muted); margin-bottom: 0.75rem; }
+.fp-dropzone-title { font-size: 0.875rem; font-weight: 600; color: var(--fp-text); margin-bottom: 0.25rem; }
+.fp-dropzone-sub { font-size: 0.78rem; color: var(--fp-text-sub); margin-bottom: 0; }
+
+.fp-code-block {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  background: #1A202C;
+  color: #A8FF78;
+  border-radius: var(--fp-radius-xs);
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.fp-import-tips .fp-label { color: var(--fp-text-sub); }
+
+/* ── Offcanvas ──────────────────────────────────────────── */
+.fp-offcanvas {
+  width: 400px !important;
+  border-left: 1px solid var(--fp-border) !important;
+  box-shadow: -8px 0 32px rgba(0,0,0,.08);
+}
+
+.fp-offcanvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--fp-border);
+}
+
+.fp-offcanvas-body { padding: 1.5rem; background: var(--fp-bg-alt); }
+
+/* Detail card inside offcanvas */
+.fp-detail-card {
+  background: var(--fp-white);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.fp-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--fp-border-light);
+}
+.fp-detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+.fp-detail-row:first-child { padding-top: 0; }
+
+.fp-detail-key {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--fp-text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fp-detail-val {
+  font-size: 0.8375rem;
+  font-weight: 600;
+  color: var(--fp-text);
+  text-align: right;
+}
+
+.fp-detail-amount-receita { font-size: 1.3rem; font-weight: 700; color: var(--fp-success); }
+.fp-detail-amount-despesa { font-size: 1.3rem; font-weight: 700; color: var(--fp-danger);  }
+
+.fp-canvas-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.fp-canvas-actions .btn { flex: 1; font-family: 'Sora', sans-serif; font-size: 0.8125rem; font-weight: 600; border-radius: var(--fp-radius-sm); }
+
+/* ── Empty state ────────────────────────────────────────── */
+.fp-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  color: var(--fp-text-sub);
+}
+.fp-empty-state i { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.35; }
+.fp-empty-state p { font-size: 0.875rem; margin: 0; }

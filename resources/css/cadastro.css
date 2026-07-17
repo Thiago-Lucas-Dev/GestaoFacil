@@ -53,6 +53,12 @@
   border-bottom: 1px solid var(--fp-border-light);
 }
 
+.section-divider {
+  margin: 1rem;
+  border-bottom: 1px solid var(--fp-border-light);
+  padding-top: 10px;
+}
+
 .cfr-section-icon {
   width: 40px;
   height: 40px;

@@ -1,5 +1,5 @@
 @push('scripts')
-    @vite('resources/js/modules/contas_pagar/create_contas_pagar')
+    @vite('resources/js/modules/contas_pagar/create')
 @endpush
 
 <x-applayout>
@@ -57,7 +57,7 @@
                                     <div class="col-md-8">
                                         <label class="fp-label">Fornecedor <span class="text-danger">*</span></label>
                                         <div class="cfr-client-select">
-                                            <select class="form-select fp-input" required>
+                                            <select class="form-select fp-input" id="fornecedorInput" required>
                                                 <option value="">Selecione o cliente...</option>
                                                 <option>Empresa Beta Comércio LTDA</option>
                                                 <option>Studio ABC Design</option>
@@ -74,7 +74,7 @@
 
                                     <div class="col-md-4">
                                         <label class="fp-label">Categoria <span class="text-danger">*</span></label>
-                                        <select class="form-select fp-input" required>
+                                        <select id="categoriaInput" class="form-select fp-input" required>
                                             <option value="">Selecione...</option>
                                             <option>Receita de Vendas</option>
                                             <option>Prestação de Serviços</option>
@@ -121,8 +121,9 @@
                                         <label class="fp-label">Valor <span class="text-danger">*</span></label>
                                         <div class="fp-input-prefix-wrap">
                                             <span class="fp-input-prefix">R$</span>
-                                            <input type="text" class="form-control fp-input fp-input-prefixed"
-                                                placeholder="0,00" id="valorInput" required />
+                                            <input id="valorInput" type="text"
+                                                class="form-control fp-input fp-input-prefixed" placeholder="0,00"
+                                                required />
                                         </div>
                                     </div>
 
@@ -297,26 +298,16 @@
 
                                             <!-- Controls row -->
                                             <div class="row g-3 align-items-end">
-                                                <div class="col-md-4">
-                                                    <label class="fp-label">Nº de Parcelas</label>
-                                                    <input type="number" class="form-control fp-input"
-                                                        value="3" min="2" max="48"
-                                                        id="numParcelas" />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="fp-label">Intervalo Padrão</label>
-                                                    <select class="form-select fp-input" id="intervaloParcelas">
-                                                        <option value="30">30 dias</option>
-                                                        <option value="15">15 dias</option>
-                                                        <option value="60">60 dias</option>
-                                                        <option value="90">90 dias</option>
-                                                    </select>
+                                                <div class="col-md-8">
+                                                    <label class="fp-label">Parcelas</label>
+                                                    <input type="string" class="form-control fp-input"
+                                                        id="numParcelas" placeholder="Ex: 3x, 5x, 10 20 30 ou 21">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button type="button"
                                                         class="btn fp-btn-primary w-100 d-flex align-items-center justify-content-center gap-1"
-                                                        id="gerarParcelasBtn">
-                                                        <i class="bi bi-magic"></i> Gerar Parcelas
+                                                        id="gerarParcelasBtn" style="padding: 10px">
+                                                        <i class="bi bi-calculator"></i> Gerar Parcelas
                                                     </button>
 
                                                 </div>
@@ -376,13 +367,13 @@
                                         style="background:var(--fp-warning-soft);color:var(--fp-warning)"><i
                                             class="bi bi-paperclip"></i></div>
                                     <div>
-                                        <h5 class="fp-section-title mb-1">Anexos e Observações</h5>
-                                        <p class="fp-section-sub mb-0">Documentos de apoio e notas internas</p>
+                                        <h5 class="fp-section-title mb-1">Observações</h5>
+                                        <p class="fp-section-sub mb-0">Observações de apoio ou notas internas</p>
                                     </div>
                                 </div>
 
                                 <div class="row g-3 mt-3">
-                                    <div class="col-12">
+                                    {{-- <div class="col-12">
                                         <label class="fp-label">Anexar Documento</label>
                                         <div class="cfr-dropzone" id="dropzone">
                                             <i class="bi bi-cloud-arrow-up cfr-dropzone-icon"></i>
@@ -392,10 +383,10 @@
                                             <input type="file" class="d-none" id="fileInput" multiple />
                                         </div>
                                         <div class="d-flex flex-column gap-2 mt-2" id="fileList"></div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-12">
                                         <label class="fp-label">Observações</label>
-                                        <textarea class="form-control fp-input" rows="3"
+                                        <textarea class="form-control fp-input" rows="4"
                                             placeholder="Informações adicionais sobre este recebimento..."></textarea>
                                     </div>
                                 </div>

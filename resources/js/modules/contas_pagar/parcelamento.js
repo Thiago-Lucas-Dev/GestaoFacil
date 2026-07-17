@@ -5,7 +5,7 @@ import {
     formatDateInput,
     dividirValor,
     interpretarParcelas
-} from './helpers'; ''
+} from './helpers';
 
 
 export function initParcelamento() {
@@ -24,7 +24,6 @@ export function initParcelamento() {
     const vencimentoInput = document.getElementById('vencimentoInput');
 
     const numeroParcelasInput = document.getElementById('numParcelas');
-    const intervaloParcelasInput = document.getElementById('intervaloParcelas');
 
     const parcelasWrap = document.getElementById('parcelasWrap');
     const parcelasSummary = document.getElementById('parcelasSummary');
@@ -125,8 +124,9 @@ export function initParcelamento() {
             }
 
 
-            numeroParcelasInput.value = '';
-            intervaloParcelasInput.value = '';
+            if (numeroParcelasInput) {
+                numeroParcelasInput.value = '';
+            }
 
         }
 
@@ -140,10 +140,14 @@ export function initParcelamento() {
 
     function gerarParcelas() {
 
+        console.log('cliquei em gerar parcelas');
+
 
         const total = parseCurrency(
             valorInput.value
         );
+
+        console.log('total:', total);
 
 
         if (!total || total <= 0) {
@@ -153,6 +157,8 @@ export function initParcelamento() {
         const regrasParcelas = interpretarParcelas(
             numeroParcelasInput.value
         );
+
+        console.log('regras:', regrasParcelas);
 
 
         if (!regrasParcelas.length) {
@@ -174,6 +180,8 @@ export function initParcelamento() {
             total,
             regrasParcelas.length
         );
+
+        console.log('valores:', valores);
 
 
         parcelas = [];
@@ -209,7 +217,7 @@ export function initParcelamento() {
             }
         );
 
-
+        console.log(parcelas);
 
         atualizarTela();
 
@@ -239,96 +247,77 @@ export function initParcelamento() {
 
     function renderParcelas() {
 
-
         if (!parcelasBody) {
             return;
         }
 
-
-        parcelasWrap.classList.remove(
-            'd-none'
-        );
-
+        parcelasWrap?.classList.remove('d-none');
 
         parcelasBody.innerHTML = '';
 
+        parcelas.forEach((parcela, index) => {
 
+            parcelasBody.insertAdjacentHTML(
+                'beforeend',
+                `
+            <tr>
 
-        parcelas.forEach(
-            (parcela, index) => {
+                <td>
+                    ${parcela.numero}
+                </td>
 
+                <td>
+                    <input
+                        type="number"
+                        class="form-control form-control-sm parcela-dias"
+                        data-index="${index}"
+                        value="${parcela.dias}">
+                </td>
 
-                parcelasBody.insertAdjacentHTML(
-                    'beforeend',
-                    `
+                <td>
+                    <input
+                        type="date"
+                        class="form-control form-control-sm parcela-data"
+                        data-index="${index}"
+                        value="${parcela.vencimento}">
+                </td>
 
-                    <tr>
+                <td>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm parcela-valor"
+                        data-index="${index}"
+                        value="${formatCurrency(parcela.valor)}">
+                </td>
 
-                        <td>
-                            ${parcela.numero}
-                        </td>
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-danger"
+                        data-remove="${index}">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
 
+            </tr>
+            `
+            );
 
-                        <td>
-                            ${parcela.dias}
-                        </td>
-
-
-                        <td>
-                            ${parcela.vencimento}
-                        </td>
-
-
-                        <td>
-                            ${formatCurrency(parcela.valor)}
-                        </td>
-
-
-                        <td>
-
-                            <button 
-                                type="button"
-                                class="btn btn-sm btn-danger"
-                                data-remove="${index}"
-                            >
-                                Remover
-                            </button>
-
-                        </td>
-
-
-                    </tr>
-
-                    `
-                );
-
-
-            }
-        );
-
-
+        });
 
         document
             .querySelectorAll('[data-remove]')
             .forEach(button => {
 
+                button.addEventListener('click', () => {
 
-                button.addEventListener(
-                    'click',
-                    () => {
+                    removerParcela(
+                        Number(button.dataset.remove)
+                    );
 
-                        removerParcela(
-                            Number(
-                                button.dataset.remove
-                            )
-                        );
-
-                    }
-                );
-
+                });
 
             });
-
 
     }
 
@@ -456,7 +445,7 @@ export function initParcelamento() {
                     : vencimentoInput.value,
 
 
-            valor: 0
+            valor: ultima ? ultima.valor : 0
 
         });
 
@@ -494,49 +483,5 @@ export function initParcelamento() {
         atualizarTela();
 
     }
-
-
-
-    // ==========================
-    // Atualizações futuras
-    // ==========================
-
-    function atualizarValor(index, valor) {
-
-
-        parcelas[index].valor =
-            valor;
-
-
-        atualizarTela();
-
-    }
-
-
-
-    function atualizarDias(index, dias) {
-
-
-        parcelas[index].dias =
-            dias;
-
-
-        atualizarTela();
-
-    }
-
-
-
-    function atualizarVencimento(index, vencimento) {
-
-
-        parcelas[index].vencimento =
-            vencimento;
-
-
-        atualizarTela();
-
-    }
-
 
 }

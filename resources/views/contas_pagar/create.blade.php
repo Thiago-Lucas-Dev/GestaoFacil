@@ -300,7 +300,7 @@
                                             <div class="row g-3 align-items-end">
                                                 <div class="col-md-8">
                                                     <label class="fp-label">Parcelas</label>
-                                                    <input type="string" class="form-control fp-input"
+                                                    <input type="text" class="form-control fp-input"
                                                         id="numParcelas" placeholder="Ex: 3x, 5x, 10 20 30 ou 21">
                                                 </div>
                                                 <div class="col-md-4">

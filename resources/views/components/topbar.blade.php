@@ -1,6 +1,6 @@
 <!-- ========== TOPBAR ========== -->
 <nav class="navbar navbar-expand-lg fp-topbar fixed-top" id="mainNavbar">
-    <div class="container-xxl">
+    <div class="container-xxl" style="max-width: 100%">
 
         <!-- Brand -->
         <a class="navbar-brand fp-brand d-flex align-items-center gap-2" href="{{ route('dashboard') }}">

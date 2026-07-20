@@ -1,5 +1,6 @@
 @push('scripts')
     @vite('resources/js/modules/contas_pagar/create')
+    @vite('resources/js/modules/contas_pagar/modal_fornecedor')
 @endpush
 
 <x-applayout>
@@ -416,7 +417,7 @@
                                     <span class="cfr-summary-val" id="summaryVencimento">—</span>
                                 </div>
                                 <div class="cfr-summary-row">
-                                    <span class="cfr-summary-key"><i class="bi bi-person me-1"></i>Cliente</span>
+                                    <span class="cfr-summary-key"><i class="bi bi-person me-1"></i>Fornecedor</span>
                                     <span class="cfr-summary-val" id="summaryCliente">—</span>
                                 </div>
                                 <div class="cfr-summary-row">
@@ -427,24 +428,8 @@
                                     <span class="cfr-summary-key"><i class="bi bi-flag me-1"></i>Status</span>
                                     <span class="fp-badge fp-badge-pendente">Pendente</span>
                                 </div>
-
-                                <hr class="my-3" style="border-color:var(--fp-border)">
-
-                                <!-- Status selection -->
-                                <label class="fp-label">Status Inicial</label>
-                                <div class="cfr-status-options" id="statusOptions">
-                                    <button type="button" class="cfr-status-opt active" data-status="pendente">
-                                        <i class="bi bi-clock"></i> Pendente
-                                    </button>
-                                    <button type="button" class="cfr-status-opt" data-status="agendado">
-                                        <i class="bi bi-calendar-check"></i> Agendado
-                                    </button>
-                                    <button type="button" class="cfr-status-opt" data-status="pago">
-                                        <i class="bi bi-check-circle"></i> Já Recebido
-                                    </button>
-                                </div>
-
                             </div>
+                            
                         </div>
                     </div>
                     <!-- ════════ FIM SIDEBAR ════════ -->
@@ -461,5 +446,8 @@
             </div>
 
         </div>
+
+        @include('contas_pagar.modals.fornecedor')
+        
     </main>
 </x-applayout>

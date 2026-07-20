@@ -13,6 +13,7 @@ use App\Http\Controllers\Configuracoes\FormasRecebimentoController;
 use App\Http\Controllers\Configuracoes\CategoriasFinanceirasController;
 
 use App\Http\Controllers\ContasPagar\ContasPagarController;
+use App\Http\Controllers\ContasPagar\FornecedorController;
 
 // ====================================
 // DASHBOARD
@@ -38,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
         ->group(function () {
 
             Route::get('/', 'index')->name('index');
-
         });
 
     // ====================================
@@ -52,37 +52,31 @@ Route::middleware(['auth'])->group(function () {
             Route::controller(ConfiguracoesController::class)->group(function () {
 
                 Route::get('/', 'index')->name('index');
-
             });
 
             Route::controller(ContaBancariaController::class)->group(function () {
 
                 Route::post('/contas-bancarias', 'store')
                     ->name('contas-bancarias.store');
-
             });
 
             Route::controller(FormasPagamentoController::class)->group(function () {
 
                 Route::post('/formas-pagamento', 'store')
                     ->name('formas-pagamento.store');
-
             });
 
             Route::controller(FormasRecebimentoController::class)->group(function () {
 
                 Route::post('/formas-recebimento', 'store')
                     ->name('formas-recebimento.store');
-
             });
 
             Route::controller(CategoriasFinanceirasController::class)->group(function () {
 
                 Route::post('/categorias-financeiras', 'store')
                     ->name('categorias.store');
-
             });
-
         });
 
     // ====================================
@@ -91,13 +85,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('contas-pagar')
         ->name('contas-pagar.')
-        ->controller(ContasPagarController::class)
         ->group(function () {
 
-            Route::get('/', 'index')->name('index');
+            Route::controller(ContasPagarController::class)->group(function () {
 
-            Route::get('/create', 'create')->name('create');
+                Route::get('/', 'index')->name('index');
 
+                Route::get('/create', 'create')->name('create');
+            });
+
+            Route::prefix('fornecedores')
+                ->name('fornecedores.')
+                ->controller(FornecedorController::class)
+                ->group(function () {
+
+                    Route::post('/', 'store')->name('store');
+                
+                });
         });
 
     // ====================================
@@ -111,9 +115,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/profile', 'update')->name('profile.update');
 
         Route::delete('/profile', 'destroy')->name('profile.destroy');
-
     });
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

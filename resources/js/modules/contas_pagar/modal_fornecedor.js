@@ -73,6 +73,9 @@ function initSalvarFornecedor() {
 
             });
 
+            console.log(response.status);
+            console.log(await response.text());
+
             const json = await response.json();
 
             if (!response.ok) {
@@ -92,7 +95,7 @@ function initSalvarFornecedor() {
 
             if (error.errors) {
 
-                showtoast({
+                showToast({
 
                     type: 'warning',
 
@@ -106,7 +109,7 @@ function initSalvarFornecedor() {
 
             showToast({
 
-                type: 'danger', 
+                type: 'danger',
 
                 message: error.message ?? 'Erro ao cadastrar fornecedor.'
 

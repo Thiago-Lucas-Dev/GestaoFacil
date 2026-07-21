@@ -17,8 +17,8 @@
                 </div>
 
                 <div>
-                    <h5 class="mb-1">Novo Fornecedor</h5>
-                    <small>
+                    <h5 class="fp-page-title mb-1">Novo Fornecedor</h5>
+                    <small class="fp-page-subtitle">
                         Cadastro rápido para lançamento financeiro
                     </small>
                 </div>
@@ -57,7 +57,7 @@
                     Nome do fornecedor
                 </label>
 
-                <input type="text" class="form-control fp-input" placeholder="Ex: CPFL, Semae, Imobiliária">
+                <input type="text" name="nome" class="form-control fp-input" placeholder="Ex: CPFL, Semae, Imobiliária">
 
             </div>
 
@@ -69,7 +69,7 @@
 
                 <div class="input-group">
 
-                    <input type="text" class="form-control fp-input" placeholder="00.000.000/0000-00">
+                    <input type="text" name="cnpj" class="form-control fp-input" placeholder="00.000.000/0000-00">
 
                     <button class="btn fp-btn-outline-secondary" type="button">
 
@@ -89,7 +89,7 @@
 
         <div class="cfr-drawer-footer">
 
-            <button class="btn fp-btn-outline-secondary" id="cancelFornecedor">
+            <button type="button" class="btn fp-btn-outline-secondary" id="cancelFornecedor">
 
                 Cancelar
 

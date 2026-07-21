@@ -59,12 +59,12 @@
 }
 
 .form-hint {
-    font-size: .7rem;
-    color: var(--text-muted);
-    margin-top: .3rem;
-    display: flex;
-    align-items: center;
-    gap: .25rem;
+  font-size: .7rem;
+  color: var(--text-muted);
+  margin-top: .3rem;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
 }
 
 .cfr-client-select select {
@@ -773,6 +773,343 @@ tr:hover .cfr-rm-btn {
 
   background: #fff;
 
+}
+
+* ── Parcelas — painel de configuração ─────────────────── */ .cfr-parcela-panel {
+  background: var(--fp-bg-alt);
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius);
+  overflow: hidden;
+}
+
+/* Config bar */
+.cfr-parcela-config {
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--fp-border);
+  background: var(--fp-white);
+}
+
+.cfr-parcela-config-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cfr-config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 160px;
+}
+
+.cfr-config-field--narrow {
+  flex: 0 0 140px;
+  min-width: 130px;
+}
+
+.cfr-config-field--action {
+  flex: 0 0 auto;
+}
+
+.cfr-field-hint {
+  font-size: 0.7rem;
+  color: var(--fp-text-muted);
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+
+.cfr-gerar-btn {
+  height: 40px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 1.1rem;
+  font-size: 0.8125rem;
+}
+
+/* ── Totalizadores ──────────────────────────────────────── */
+.cfr-parcelas-summary {
+  display: flex;
+  gap: 0;
+  background: var(--fp-white);
+  border-bottom: 1px solid var(--fp-border);
+}
+
+.cfr-ps-item {
+  flex: 1;
+  padding: 0.8rem 1.1rem;
+  border-right: 1px solid var(--fp-border);
+}
+
+.cfr-ps-item:last-child {
+  border-right: none;
+}
+
+.cfr-ps-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fp-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.cfr-ps-val {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--fp-text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.cfr-ps-val.ok {
+  color: var(--fp-success);
+}
+
+.cfr-ps-val.warn {
+  color: var(--fp-warning);
+}
+
+.cfr-ps-val.err {
+  color: var(--fp-danger);
+}
+
+/* ── Tabela ─────────────────────────────────────────────── */
+.cfr-parcelas-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cfr-parcelas-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+/* Colunas */
+.cfr-parcelas-table .col-num {
+  width: 58px;
+}
+
+.cfr-parcelas-table .col-dias {
+  width: 100px;
+}
+
+.cfr-parcelas-table .col-data {
+  width: 190px;
+}
+
+.cfr-parcelas-table .col-valor {}
+
+.cfr-parcelas-table .col-acao {
+  width: 40px;
+}
+
+.cfr-parcelas-table thead th {
+  background: var(--fp-bg-alt);
+  color: var(--fp-text-sub);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--fp-border);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.cfr-parcelas-table thead th.col-valor {
+  text-align: right;
+}
+
+.cfr-parcelas-table thead th.col-acao {
+  text-align: center;
+}
+
+.cfr-parcelas-table tbody tr {
+  border-bottom: 1px solid var(--fp-border-light);
+  background: var(--fp-white);
+  transition: background 0.12s;
+}
+
+.cfr-parcelas-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cfr-parcelas-table tbody tr:hover {
+  background: #FAFBFF;
+}
+
+.cfr-parcelas-table tbody td {
+  padding: 0.45rem 0.75rem;
+  vertical-align: middle;
+}
+
+/* Tfoot */
+.cfr-parcelas-table tfoot tr {
+  background: var(--fp-bg-alt);
+  border-top: 2px solid var(--fp-border);
+}
+
+.cfr-parcelas-table tfoot td {
+  padding: 0.65rem 0.9rem;
+  vertical-align: middle;
+}
+
+/* Badge de número da parcela */
+.cfr-p-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fp-primary-soft);
+  color: var(--fp-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Inputs inline editáveis ────────────────────────────── */
+.cfr-cell-input {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--fp-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--fp-radius-xs);
+  padding: 0.35rem 0.5rem;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  outline: none;
+  line-height: 1.4;
+}
+
+.cfr-cell-input:hover {
+  border-color: var(--fp-border);
+  background: var(--fp-white);
+}
+
+.cfr-cell-input:focus {
+  border-color: var(--fp-primary);
+  background: var(--fp-white);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, .1);
+}
+
+/* variantes por coluna */
+.cfr-cell-input.input-dias {
+  width: 72px;
+  text-align: center;
+}
+
+.cfr-cell-input.input-data {
+  width: 160px;
+}
+
+.cfr-cell-input.input-valor {
+  text-align: right;
+  font-weight: 600;
+}
+
+/* indicador de valor editado manualmente */
+.cfr-cell-input.edited {
+  color: var(--fp-primary);
+}
+
+/* ── Badge de diferença no rodapé ───────────────────────── */
+.cfr-diff-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 20px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.cfr-diff-ok {
+  background: var(--fp-success-soft);
+  color: var(--fp-success);
+}
+
+.cfr-diff-warn {
+  background: var(--fp-warning-soft);
+  color: var(--fp-warning);
+}
+
+.cfr-diff-err {
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+}
+
+/* Totais no rodapé */
+.cfr-foot-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fp-text-sub);
+}
+
+.cfr-foot-total {
+  font-size: 0.925rem;
+  font-weight: 800;
+  color: var(--fp-text);
+  letter-spacing: -0.01em;
+  text-align: right;
+}
+
+/* ── Botão remover linha ────────────────────────────────── */
+.cfr-rm-btn {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--fp-text-muted);
+  border-radius: var(--fp-radius-xs);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  opacity: 0;
+}
+
+tr:hover .cfr-rm-btn {
+  opacity: 1;
+}
+
+.cfr-rm-btn:hover {
+  background: var(--fp-danger-soft);
+  color: var(--fp-danger);
+}
+
+/* ── Rodapé da seção ────────────────────────────────────── */
+.cfr-parcela-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--fp-bg-alt);
+  border-top: 1px solid var(--fp-border);
+  flex-wrap: wrap;
+}
+
+.cfr-parcelas-hint {
+  font-size: 0.74rem;
+  color: var(--fp-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 /* ── Responsive ─────────────────────────────────────────── */

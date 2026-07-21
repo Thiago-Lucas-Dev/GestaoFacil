@@ -38,10 +38,10 @@ export function initParcelamento() {
     // Proteção
     // ==========================
 
-    console.log('iniciando parcelamento')
+    // console.log('iniciando parcelamento')
 
     if (!parcelaSwitch) {
-        console.log('não achou parcelamento')
+        // console.log('não achou parcelamento')
         return;
     }
 
@@ -68,7 +68,7 @@ export function initParcelamento() {
         gerarParcelas
     );
 
-    console.log('botão gerar:', gerarParcelasBtn);
+    // console.log('botão gerar:', gerarParcelasBtn);
 
 
     addParcelaBtn?.addEventListener(

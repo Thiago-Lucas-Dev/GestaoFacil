@@ -1,3 +1,5 @@
+console.log('TOAST CARREGOU');
+
 const toast = document.querySelector('.toast-item');
 
 if (toast) {
@@ -129,3 +131,5 @@ export function showToast({
     fecharToast(toast, duration);
 
 }
+
+window.showToast = showToast;

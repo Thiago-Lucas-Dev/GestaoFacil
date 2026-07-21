@@ -1,9 +1,8 @@
 @push('scripts')
     @vite('resources/js/modules/contas_pagar/create')
-    @vite('resources/js/modules/contas_pagar/modal_fornecedor')
 @endpush
 
-<x-applayout>
+<x-app-layout>
     <main class="fp-main">
         <div class="container-xxl py-4">
 
@@ -450,4 +449,4 @@
         @include('contas_pagar.modals.fornecedor')
         
     </main>
-</x-applayout>
+</x-app-layout>

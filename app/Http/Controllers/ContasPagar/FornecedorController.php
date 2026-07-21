@@ -11,13 +11,14 @@ use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
-    public function store(StoreFornecedorRequest $request) {
+    public function store(StoreFornecedorRequest $request)
+    {
 
         try {
 
             $data = $request->validated();
 
-            $fornecedor = Fornecedor::create();
+            $fornecedor = Fornecedor::create($data);
 
             return response()->json([
                 'success' => true,
@@ -27,15 +28,12 @@ class FornecedorController extends Controller
                     'nome' => $fornecedor->nome,
                 ]
             ]);
-
         } catch (\Exception $e) {
 
             return response()->json([
-                'success' => false, 
+                'success' => false,
                 'message' => 'Erro ao cadastrar fonrecedor'
             ], 500);
-
         }
-
     }
 }

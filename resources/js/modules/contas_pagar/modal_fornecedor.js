@@ -73,9 +73,6 @@ function initSalvarFornecedor() {
 
             });
 
-            console.log(response.status);
-            console.log(await response.text());
-
             const json = await response.json();
 
             if (!response.ok) {
@@ -89,6 +86,8 @@ function initSalvarFornecedor() {
 
                 message: json.message
             });
+            
+            closeDrawer();
 
         }
         catch (error) {
@@ -121,5 +120,9 @@ function initSalvarFornecedor() {
 
 }
 
-initDrawer();
-initSalvarFornecedor();
+export function initModalFornecedor() {
+
+    initDrawer();
+    initSalvarFornecedor();
+
+}

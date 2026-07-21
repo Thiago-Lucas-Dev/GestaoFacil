@@ -2,36 +2,6 @@
    FINANCEIRO PRO — conta-receber-form.css
    ============================================================ */
 
-/* ── Breadcrumb ─────────────────────────────────────────── */
-.cfr-breadcrumb {
-  font-size: 0.78rem;
-  background: transparent;
-  padding: 0;
-}
-
-.cfr-breadcrumb .breadcrumb-item a {
-  color: var(--fp-text-sub);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.cfr-breadcrumb .breadcrumb-item a:hover {
-  color: var(--fp-primary);
-}
-
-.cfr-breadcrumb .breadcrumb-item.active {
-  color: var(--fp-text);
-  font-weight: 600;
-}
-
-.cfr-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
-  content: "\F285";
-  font-family: "bootstrap-icons";
-  color: var(--fp-text-muted);
-  font-size: 0.65rem;
-  vertical-align: middle;
-}
-
 /* ── Back button ────────────────────────────────────────── */
 .cfr-back-btn {
   width: 38px;
@@ -86,6 +56,15 @@
 .cfr-client-select {
   display: flex;
   gap: 0.5rem;
+}
+
+.form-hint {
+    font-size: .7rem;
+    color: var(--text-muted);
+    margin-top: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
 }
 
 .cfr-client-select select {

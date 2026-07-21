@@ -3,6 +3,7 @@ import { initParcelamento } from './parcelamento';
 import { initSummary } from './summary';
 import { initRecorrencia } from './recorrencia';
 import { initStatus } from './status';
+import { initToggles } from './toggles';
 import { initModalFornecedor } from './modal_fornecedor';
 
 function iniciarDatas() {
@@ -37,6 +38,8 @@ export function initContaPagarCreate() {
     initRecorrencia();
 
     // initStatus();
+
+    initToggles();
 
     initModalFornecedor();
 

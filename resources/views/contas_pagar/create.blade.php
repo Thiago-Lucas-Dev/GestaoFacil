@@ -57,45 +57,57 @@
                                     <div class="col-md-8">
                                         <label class="fp-label">Fornecedor <span class="text-danger">*</span></label>
                                         <div class="cfr-client-select">
-                                            <select class="form-select fp-input" id="fornecedorInput" required>
-                                                <option value="">Selecione o cliente...</option>
-                                                <option>Empresa Beta Comércio LTDA</option>
-                                                <option>Studio ABC Design</option>
-                                                <option>Cliente X — Pessoa Física</option>
-                                                <option>Tech Solutions S.A.</option>
-                                                <option>Marketplace Z Brasil</option>
+                                            <select class="form-select fp-input" name="fornecedor_id"
+                                                id="fornecedorInput" required>
+                                                <option value="" selected disabled>Selecione o fornecedor</option>
+
+                                                @foreach ($fornecedores as $fornecedor)
+                                                    <option value="{{ $fornecedor->id }}">
+                                                        {{ $fornecedor->nome }}
+                                                    </option>
+                                                @endforeach
+
                                             </select>
+
                                             <button type="button" class="cfr-add-client"
                                                 title="Cadastrar novo cliente">
                                                 <i class="bi bi-plus-lg"></i>
                                             </button>
                                         </div>
+                                        <div class="form-hint"><i class="bi bi-info-circle"></i> Clique no + para
+                                            cadastrar um novo fornecedor</div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <label class="fp-label">Categoria <span class="text-danger">*</span></label>
-                                        <select id="categoriaInput" class="form-select fp-input" required>
-                                            <option value="">Selecione...</option>
-                                            <option>Receita de Vendas</option>
-                                            <option>Prestação de Serviços</option>
-                                            <option>Juros e Correções</option>
-                                            <option>Royalties</option>
-                                            <option>Outras Receitas</option>
+                                        <select id="categoriaInput" name="categoria_id" class="form-select fp-input"
+                                            required>
+                                            <option value="" selected disabled>Selecione uma categoria</option>
+
+                                            @foreach ($categorias as $categoria)
+                                                <option value="{{ $categoria->id }}">
+                                                    {{ $categoria->nome }}
+                                                </option>
+                                            @endforeach
+
                                         </select>
+                                        <div class="form-hint"><i class="bi bi-info-circle"></i> Crie categorias na aba
+                                            de configurações</div>
                                     </div>
 
                                     <div class="section-divider"></div>
 
                                     <div class="col-md-6">
                                         <label class="fp-label">Data de Geração</label>
-                                        <input type="date" class="form-control fp-input" id="emissaoInput" />
+                                        <input type="text" class="form-control fp-input fp-date fp-today"
+                                            placeholder="DD/MM/AAAA" id="emissaoInput" />
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="fp-label">Data de Vencimento <span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" class="form-control fp-input" id="vencimentoInput"
-                                            required />
+                                        <input type="text" class="form-control fp-input fp-date"
+                                            placeholder="DD/MM/AAAA" id="vencimentoInput" required>
                                     </div>
 
                                 </div>
@@ -162,31 +174,50 @@
                                         </div>
                                     </div>
 
-                                    <!-- Recurrence options (hidden by default) -->
+                                    <!-- Recorrencia options (hidden by default) -->
                                     <div class="col-12 d-none" id="recorrenciaOptions">
                                         <div class="cfr-recur-box">
                                             <div class="row g-3 mb-4">
                                                 <div class="col-md-12">
-                                                    <label class="fp-label">Frequência</label>
-                                                    <select class="form-select fp-input">
-                                                        <option>Mensal</option>
-                                                        <option>Quinzenal</option>
-                                                        <option>Semanal</option>
-                                                        <option>Anual</option>
-                                                    </select>
-                                                </div>
-                                                {{-- <div class="col-md-4">
-                                                    <label class="fp-label">Repetir por</label>
-                                                    <div class="cfr-input-suffix-wrap">
-                                                        <input type="number" class="form-control fp-input"
-                                                            value="12" min="1" />
-                                                        <span class="cfr-input-suffix">vezes</span>
+
+                                                    <label class="fp-label">
+                                                        Repetir a cada
+                                                    </label>
+
+                                                    <div class="row g-2">
+
+                                                        <div class="col-4">
+                                                            <input type="number" class="form-control fp-input"
+                                                                id="recIntervalo" min="1" value="1">
+                                                        </div>
+
+                                                        <div class="col-8">
+
+                                                            <select class="form-control fp-input" id="recPeriodo">
+
+                                                                <option value="dias">
+                                                                    Dia(s)
+                                                                </option>
+
+                                                                <option value="semanas">
+                                                                    Semana(s)
+                                                                </option>
+
+                                                                <option value="meses" selected>
+                                                                    Mês(es)
+                                                                </option>
+
+                                                                <option value="anos">
+                                                                    Ano(s)
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+
                                                     </div>
+
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label class="fp-label">Encerrar em</label>
-                                                    <input type="date" class="form-control fp-input" />
-                                                </div> --}}
                                             </div>
                                             <div class="row g-3">
 
@@ -218,8 +249,12 @@
                                                                 </label>
                                                             </div>
 
-                                                            <input type="date" class="form-control fp-input"
-                                                                id="recDataFim" disabled>
+                                                            <input 
+                                                                type="text" 
+                                                                class="form-control fp-input fp-date"
+                                                                placeholder="DD/MM/AAAA"
+                                                                id="recDataFim" 
+                                                                disabled>
                                                         </div>
 
                                                         <!-- Após X ocorrências -->
@@ -403,33 +438,155 @@
                         <!-- Resumo -->
                         <div class="fp-card mb-4 cfr-summary-sticky">
                             <div class="fp-card-body p-4">
-                                <h5 class="fp-section-title mb-3">Resumo do Título</h5>
+
+                                <h5 class="fp-section-title mb-3">
+                                    Resumo da Conta
+                                </h5>
+
+                                <!-- ==========================
+                                    VALOR
+                                =========================== -->
 
                                 <div class="cfr-summary-amount">
-                                    <span class="cfr-summary-label">Valor a Receber</span>
-                                    <span class="cfr-summary-value" id="summaryValor">R$ 0,00</span>
+                                    <span class="cfr-summary-label">
+                                        Valor da Despesa
+                                    </span>
+
+                                    <span class="cfr-summary-value" id="summaryValor">
+                                        R$ 0,00
+                                    </span>
                                 </div>
 
-                                <div class="cfr-summary-row">
-                                    <span class="cfr-summary-key"><i
-                                            class="bi bi-calendar-event me-1"></i>Vencimento</span>
-                                    <span class="cfr-summary-val" id="summaryVencimento">—</span>
+                                <!-- ==========================
+                                    INFORMAÇÕES COMUNS
+                                =========================== -->
+
+                                <div id="summaryBase">
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-flag me-1"></i>
+                                            Status
+                                        </span>
+
+                                        <span class="fp-badge fp-badge-pendente">
+                                            Pendente
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-calendar-event me-1"></i>
+                                            Vencimento
+                                        </span>
+
+                                        <span class="cfr-summary-val" id="summaryVencimento">
+                                            —
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-person me-1"></i>
+                                            Fornecedor
+                                        </span>
+
+                                        <span class="cfr-summary-val" id="summaryFornecedor">
+                                            —
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-tag me-1"></i>
+                                            Categoria
+                                        </span>
+
+                                        <span class="cfr-summary-val" id="summaryCategoria">
+                                            —
+                                        </span>
+                                    </div>
+
                                 </div>
-                                <div class="cfr-summary-row">
-                                    <span class="cfr-summary-key"><i class="bi bi-person me-1"></i>Fornecedor</span>
-                                    <span class="cfr-summary-val" id="summaryCliente">—</span>
+
+                                <!-- ==========================
+                                    RESUMO PARCELAMENTO
+                                =========================== -->
+
+                                <div id="summaryParcelado" class="d-none mt-4">
+
+                                    <hr>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-list-ol me-1"></i>
+                                            Parcelas
+                                        </span>
+
+                                        <span id="summaryParcelas" class="cfr-summary-val">
+                                            —
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-calendar-check me-1"></i>
+                                            Próx. vencimento
+                                        </span>
+
+                                        <span id="summaryProximoVencimento" class="cfr-summary-val">
+                                            —
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-calendar2-week me-1"></i>
+                                            Último vencimento
+                                        </span>
+
+                                        <span id="summaryUltimoVencimento" class="cfr-summary-val">
+                                            —
+                                        </span>
+                                    </div>
+
                                 </div>
-                                <div class="cfr-summary-row">
-                                    <span class="cfr-summary-key"><i class="bi bi-tag me-1"></i>Categoria</span>
-                                    <span class="cfr-summary-val" id="summaryCategoria">—</span>
+
+                                <!-- ==========================
+                                    RESUMO RECORRÊNCIA
+                                =========================== -->
+
+                                <div id="summaryRecorrencia" class="d-none mt-4">
+
+                                    <hr>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-arrow-repeat me-1"></i>
+                                            Recorrência
+                                        </span>
+
+                                        <span id="summaryRecorrenciaTipo" class="cfr-summary-val">
+                                            —
+                                        </span>
+                                    </div>
+
+                                    <div class="cfr-summary-row">
+                                        <span class="cfr-summary-key">
+                                            <i class="bi bi-stop-circle me-1"></i>
+                                            Término
+                                        </span>
+
+                                        <span id="summaryRecorrenciaFim" class="cfr-summary-val">
+                                            Sem término
+                                        </span>
+                                    </div>
+
                                 </div>
-                                <div class="cfr-summary-row">
-                                    <span class="cfr-summary-key"><i class="bi bi-flag me-1"></i>Status</span>
-                                    <span class="fp-badge fp-badge-pendente">Pendente</span>
-                                </div>
+
                             </div>
-                            
                         </div>
+
                     </div>
                     <!-- ════════ FIM SIDEBAR ════════ -->
 
@@ -447,6 +604,6 @@
         </div>
 
         @include('contas_pagar.modals.fornecedor')
-        
+
     </main>
 </x-app-layout>

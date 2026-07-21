@@ -135,3 +135,9 @@ export function interpretarParcelas(valor) {
     return dias;
 
 }
+
+export function getSelectedText(select) {
+    return select.selectedIndex > 0
+        ? select.options[select.selectedIndex].text
+        : '—';
+}

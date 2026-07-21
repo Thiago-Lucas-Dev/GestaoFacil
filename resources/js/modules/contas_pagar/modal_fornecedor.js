@@ -83,11 +83,26 @@ function initSalvarFornecedor() {
 
             showToast({
                 type: 'success',
-
                 message: json.message
             });
-            
+
             closeDrawer();
+
+            form.reset();
+
+            const select = document.getElementById("fornecedorInput");
+
+            const option = new Option(
+                json.fornecedor.nome,
+                json.fornecedor.id,
+                true,
+                true
+            );
+
+            select.add(option);
+            select.value = json.fornecedor.id;
+
+            select.dispatchEvent(new Event('change'));
 
         }
         catch (error) {

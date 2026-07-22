@@ -1,3 +1,4 @@
+import { initFlatpickr } from '../../components/flatpickr';
 import {
     parseCurrency,
     formatCurrency,
@@ -277,7 +278,7 @@ export function initParcelamento() {
                 <td>
                     <input
                         type="date"
-                        class="form-control form-control-sm parcela-data"
+                        class="form-control form-control-sm parcela-data fp-date"
                         data-index="${index}"
                         value="${parcela.vencimento}">
                 </td>
@@ -304,6 +305,8 @@ export function initParcelamento() {
             );
 
         });
+
+        initFlatpickr();
 
         document
             .querySelectorAll('[data-remove]')
@@ -370,38 +373,32 @@ export function initParcelamento() {
 
     function atualizarRodape() {
 
-
         if (!parcelasFoot) {
             return;
         }
 
-
         const total = parcelas.reduce(
-            (soma, parcela) =>
-                soma + parcela.valor,
+            (soma, parcela) => soma + parcela.valor,
             0
         );
 
-
+        const quantidade = parcelas.length;
 
         parcelasFoot.innerHTML = `
+        <tr>
 
-            <tr>
+            <td colspan="3" class="cfr-foot-label">
+                ${quantidade} parcela${quantidade !== 1 ? 's' : ''} no total
+            </td>
 
-                <th colspan="4">
-                    Total
-                </th>
+            <td class="cfr-foot-total">
+                ${formatCurrency(total)}
+            </td>
 
+            <td></td>
 
-                <th>
-                    ${formatCurrency(total)}
-                </th>
-
-
-            </tr>
-
-        `;
-
+        </tr>
+    `;
 
     }
 

@@ -296,7 +296,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-12 d-none" id="parcelaOptions">
+                                    <div class="col-12 d-none" id="parcelaOptions">
                                         <div class="cfr-recur-box">
 
                                             <!-- Controls row -->
@@ -356,9 +356,9 @@
 
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
-                                    <div class="col-12 d-none" id="parcelaOptions">
+                                    {{-- <div class="col-12 d-none" id="parcelaOptions">
                                         <div class="cfr-parcela-panel">
 
                                             <!-- ── Configuração ── -->
@@ -435,7 +435,7 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>

@@ -775,7 +775,8 @@ tr:hover .cfr-rm-btn {
 
 }
 
-* ── Parcelas — painel de configuração ─────────────────── */ .cfr-parcela-panel {
+/* ── Parcelas — painel de configuração ─────────────────── */ 
+.cfr-parcela-panel {
   background: var(--fp-bg-alt);
   border: 1px solid var(--fp-border);
   border-radius: var(--fp-radius);

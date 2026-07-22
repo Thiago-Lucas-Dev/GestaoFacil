@@ -30,7 +30,6 @@ export function initParcelamento() {
     const parcelasSummary = document.getElementById('parcelasSummary');
 
     const parcelasBody = document.getElementById('parcelasBody');
-    const parcelasFoot = document.getElementById('parcelasFoot');
 
     const addParcelaBtn = document.getElementById('addParcelaBtn');
 
@@ -119,12 +118,6 @@ export function initParcelamento() {
                 parcelasSummary.innerHTML = '';
             }
 
-
-            if (parcelasFoot) {
-                parcelasFoot.innerHTML = '';
-            }
-
-
             if (numeroParcelasInput) {
                 numeroParcelasInput.value = '';
             }
@@ -133,7 +126,182 @@ export function initParcelamento() {
 
     }
 
+    // ==========================
+    // Atualizar tela
+    // ==========================
 
+    function render() {
+
+        renderResumo();
+
+        renderTabela();
+
+    }
+
+    // ==========================
+    // Resumo
+    // ==========================
+
+    function renderResumo() {
+
+
+        if (!parcelasSummary) {
+            return;
+        }
+
+        const total = parcelas.reduce(
+            (soma, parcela) => soma + parcela.valor,
+            0
+        );
+
+        const valorParcela =
+            parcelas.length
+                ? total / parcelas.length
+                : 0;
+
+        parcelasSummary.innerHTML = `
+
+            <div class="cfr-ps-item">
+
+                <div class="cfr-ps-label">
+                    Parcelas
+                </div>
+
+                <div class="cfr-ps-val">
+                    ${parcelas.length}x
+                </div>
+
+            </div>
+
+            <div class="cfr-ps-item">
+
+                <div class="cfr-ps-label">
+                    Valor total
+                </div>
+
+                <div class="cfr-ps-val">
+                    ${formatCurrency(total)}
+                </div>
+
+            </div>
+
+            <div class="cfr-ps-item">
+
+                <div class="cfr-ps-label">
+                    Por parcela
+                </div>
+
+                <div class="cfr-ps-val">
+                    ${formatCurrency(valorParcela)}
+                </div>
+
+            </div>
+
+        `;
+
+
+    }
+
+    // ==========================
+    // Render tabela
+    // ==========================
+
+    function renderTabela() {
+
+        if (!parcelasBody) {
+            return;
+        }
+
+        parcelasWrap?.classList.remove('d-none');
+
+        parcelasBody.innerHTML =
+            parcelas
+                .map(renderLinha)
+                .join('');
+
+        initFlatpickr();
+
+        bindTabelaEventos();
+
+    }
+
+    function renderLinha(parcela, index) {
+
+        return `
+                    <tr data-idx="${index}">
+
+                        <td>
+                            <span class="cfr-p-num">
+                                ${parcela.numero}
+                            </span>
+                        </td>
+
+                        <td>
+                            <input
+                                type="number"
+                                class="cfr-cell-input input-dias"
+                                data-index="${index}"
+                                value="${parcela.dias}"
+                                min="1">
+                        </td>
+
+                        <td>
+                            <input
+                                type="date"
+                                class="cfr-cell-input input-data fp-date"
+                                data-index="${index}"
+                                value="${parcela.vencimento}">
+                        </td>
+
+                        <td>
+                            <input
+                                type="text"
+                                class="cfr-cell-input input-valor"
+                                data-index="${index}"
+                                value="${formatCurrency(parcela.valor)}">
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="cfr-rm-btn"
+                                data-remove="${index}">
+
+                                <i class="bi bi-x-lg"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>  
+        `;
+
+    }
+
+    function bindTabelaEventos() {
+
+        bindRemover();
+
+    }
+
+    function bindRemover() {
+
+        document
+            .querySelectorAll('[data-remove]')
+            .forEach(button => {
+
+                button.addEventListener('click', () => {
+
+                    removerParcela(
+                        Number(button.dataset.remove)
+                    );
+
+                });
+
+            });
+
+    }
 
     // ==========================
     // Gerar parcelas
@@ -220,189 +388,9 @@ export function initParcelamento() {
 
         console.log(parcelas);
 
-        atualizarTela();
+        render();
 
     }
-
-
-
-    // ==========================
-    // Atualizar tela
-    // ==========================
-
-    function atualizarTela() {
-
-        renderParcelas();
-
-        atualizarResumo();
-
-        atualizarRodape();
-
-    }
-
-
-
-    // ==========================
-    // Render tabela
-    // ==========================
-
-    function renderParcelas() {
-
-        if (!parcelasBody) {
-            return;
-        }
-
-        parcelasWrap?.classList.remove('d-none');
-
-        parcelasBody.innerHTML = '';
-
-        parcelas.forEach((parcela, index) => {
-
-            parcelasBody.insertAdjacentHTML(
-                'beforeend',
-                `
-            <tr>
-
-                <td>
-                    ${parcela.numero}
-                </td>
-
-                <td>
-                    <input
-                        type="number"
-                        class="form-control form-control-sm parcela-dias"
-                        data-index="${index}"
-                        value="${parcela.dias}">
-                </td>
-
-                <td>
-                    <input
-                        type="date"
-                        class="form-control form-control-sm parcela-data fp-date"
-                        data-index="${index}"
-                        value="${parcela.vencimento}">
-                </td>
-
-                <td>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm parcela-valor"
-                        data-index="${index}"
-                        value="${formatCurrency(parcela.valor)}">
-                </td>
-
-                <td>
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-danger"
-                        data-remove="${index}">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-
-            </tr>
-            `
-            );
-
-        });
-
-        initFlatpickr();
-
-        document
-            .querySelectorAll('[data-remove]')
-            .forEach(button => {
-
-                button.addEventListener('click', () => {
-
-                    removerParcela(
-                        Number(button.dataset.remove)
-                    );
-
-                });
-
-            });
-
-    }
-
-
-
-    // ==========================
-    // Resumo
-    // ==========================
-
-    function atualizarResumo() {
-
-
-        if (!parcelasSummary) {
-            return;
-        }
-
-
-        const total = parcelas.reduce(
-            (soma, parcela) =>
-                soma + parcela.valor,
-            0
-        );
-
-
-
-        parcelasSummary.innerHTML = `
-
-            <strong>
-                ${parcelas.length}
-            </strong> parcela(s)
-
-            <br>
-
-            Total:
-            <strong>
-                ${formatCurrency(total)}
-            </strong>
-
-        `;
-
-
-    }
-
-
-
-
-    // ==========================
-    // Rodapé tabela
-    // ==========================
-
-    function atualizarRodape() {
-
-        if (!parcelasFoot) {
-            return;
-        }
-
-        const total = parcelas.reduce(
-            (soma, parcela) => soma + parcela.valor,
-            0
-        );
-
-        const quantidade = parcelas.length;
-
-        parcelasFoot.innerHTML = `
-        <tr>
-
-            <td colspan="3" class="cfr-foot-label">
-                ${quantidade} parcela${quantidade !== 1 ? 's' : ''} no total
-            </td>
-
-            <td class="cfr-foot-total">
-                ${formatCurrency(total)}
-            </td>
-
-            <td></td>
-
-        </tr>
-    `;
-
-    }
-
-
 
     // ==========================
     // Adicionar parcela manual
@@ -448,12 +436,10 @@ export function initParcelamento() {
 
 
 
-        atualizarTela();
+        render();
 
 
     }
-
-
 
     // ==========================
     // Remover parcela
@@ -477,7 +463,7 @@ export function initParcelamento() {
         );
 
 
-        atualizarTela();
+        render();
 
     }
 

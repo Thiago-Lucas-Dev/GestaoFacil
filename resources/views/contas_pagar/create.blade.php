@@ -303,7 +303,7 @@
                                             <div class="row g-3 align-items-end">
                                                 <div class="col-md-8">
                                                     <label class="fp-label">Parcelas</label>
-                                                    <input type="text" class="form-control fp-input"
+                                                    <input type="text" class="form-select fp-input"
                                                         id="numParcelas" placeholder="Ex: 3x, 5x, 10 20 30 ou 21">
                                                 </div>
                                                 <div class="col-md-4">
@@ -335,7 +335,6 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="parcelasBody"></tbody>
-                                                        <tfoot id="parcelasFoot"></tfoot>
                                                     </table>
                                                 </div>
 
@@ -357,86 +356,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    {{-- <div class="col-12 d-none" id="parcelaOptions">
-                                        <div class="cfr-parcela-panel">
-
-                                            <!-- ── Configuração ── -->
-                                            <div class="cfr-parcela-config">
-                                                <div class="cfr-parcela-config-fields">
-
-                                                    <div class="cfr-config-field">
-                                                        <label class="fp-label">Parcelas</label>
-                                                        <input type="text" class="form-control fp-input"
-                                                            id="numParcelas" placeholder="Ex: 3x, 5x, 10 20 30" />
-                                                        <span class="cfr-field-hint">Números separados por espaço
-                                                            definem dias individuais</span>
-                                                    </div>
-
-                                                    <div class="cfr-config-field cfr-config-field--narrow">
-                                                        <label class="fp-label">Intervalo padrão</label>
-                                                        <select class="form-select fp-input" id="intervaloParcelas">
-                                                            <option value="30">30 dias</option>
-                                                            <option value="15">15 dias</option>
-                                                            <option value="60">60 dias</option>
-                                                            <option value="90">90 dias</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="cfr-config-field cfr-config-field--action">
-                                                        <label class="fp-label">&nbsp;</label>
-                                                        <button type="button"
-                                                            class="btn fp-btn-primary cfr-gerar-btn"
-                                                            id="gerarParcelasBtn">
-                                                            <i class="bi bi-calculator"></i>
-                                                            Gerar Parcelas
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <!-- ── Resultado: tabela editável ── -->
-                                            <div class="" id="parcelasWrap">
-
-                                                <!-- Totalizadores -->
-                                                <div class="cfr-parcelas-summary" id="parcelasSummary"></div>
-
-                                                <!-- Tabela -->
-                                                <div class="cfr-parcelas-table-wrap">
-                                                    <table class="cfr-parcelas-table" id="parcelasTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="col-num">Parc.</th>
-                                                                <th class="col-dias">Dias</th>
-                                                                <th class="col-data">Data de Vencimento</th>
-                                                                <th class="col-valor">Valor (R$)</th>
-                                                                <th class="col-acao"></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="parcelasBody"></tbody>
-                                                        <tfoot id="parcelasFoot"></tfoot>
-                                                    </table>
-                                                </div>
-
-                                                <!-- Rodapé da tabela -->
-                                                <div class="cfr-parcela-footer">
-                                                    <span class="cfr-parcelas-hint">
-                                                        <i class="bi bi-info-circle"></i>
-                                                        Clique em qualquer campo para editar — data e valor recalculam
-                                                        automaticamente.
-                                                    </span>
-                                                    <button type="button"
-                                                        class="btn fp-btn-outline-secondary btn-sm d-flex align-items-center gap-1"
-                                                        id="addParcelaBtn">
-                                                        <i class="bi bi-plus-lg"></i> Adicionar linha
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                 </div>
                             </div>
                         </div>

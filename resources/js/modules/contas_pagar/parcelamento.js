@@ -26,6 +26,8 @@ export function initParcelamento() {
     const emissaoInput = document.getElementById('emissaoInput');
     const vencimentoInput = document.getElementById('vencimentoInput');
 
+    console.log(vencimentoInput);
+
     const numeroParcelasInput = document.getElementById('numParcelas');
 
     const parcelasWrap = document.getElementById('parcelasWrap');
@@ -107,6 +109,20 @@ export function initParcelamento() {
             !parcelaSwitch.checked
         );
 
+        if (parcelaSwitch.checked) {
+
+            console.log('Readonly ON')
+
+            vencimentoInput.readOnly = true;
+
+        } else {
+
+            console.log('Readonly OFF')
+
+            vencimentoInput.readOnly = false;
+
+        }
+
 
         if (!parcelaSwitch.checked) {
 
@@ -154,13 +170,13 @@ export function initParcelamento() {
 
         recalcularDatas(opcoes);
 
-        recalcularValores(opcoes);
+        if (!opcoes.somenteDatas) {
+            recalcularValores(opcoes);
+        }
 
         atualizarVencimentoFinal();
 
         render();
-        
-        console.log('depois do render', emissaoInput.value);
 
     }
 
@@ -390,7 +406,8 @@ export function initParcelamento() {
                     parcelas[index].dias = Number(input.value);
 
                     recalcularParcelas({
-                        atualizarData: index
+                        atualizarData: index,
+                        somenteDatas: true
                     });
 
                 });
@@ -412,7 +429,8 @@ export function initParcelamento() {
                     parcelas[index].vencimento = input.value;
 
                     recalcularParcelas({
-                        atualizarDias: index
+                        atualizarDias: index,
+                        somenteDatas: true
                     });
 
                 });
@@ -528,7 +546,8 @@ export function initParcelamento() {
         }
 
         recalcularParcelas({
-            atualizarTodasDatas: true
+            atualizarTodasDatas: true,
+            somenteDatas: true
         });
 
     }

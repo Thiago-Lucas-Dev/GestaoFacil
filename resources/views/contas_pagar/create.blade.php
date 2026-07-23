@@ -337,11 +337,11 @@
                                                         <tbody id="parcelasBody"></tbody>
                                                     </table>
                                                 </div>
-
+''
                                                 <!-- Actions -->
                                                 <div
                                                     class="d-flex align-items-center justify-content-between mt-3 flex-wrap gap-2">
-                                                    <span class="cfr-parcelas-hint">
+                                                    <span class="cfr-parcelas-hint" style="color: #9e9fa1">
                                                         <i class="bi bi-pencil me-1"></i>
                                                         Edite dias, data ou valor diretamente na tabela — os cálculos
                                                         são feitos na hora.

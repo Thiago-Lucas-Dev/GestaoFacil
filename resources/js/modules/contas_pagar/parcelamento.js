@@ -22,6 +22,8 @@ export function initParcelamento() {
     const gerarParcelasBtn = document.getElementById('gerarParcelasBtn');
 
     const valorInput = document.getElementById('valorInput');
+
+    const emissaoInput = document.getElementById('emissaoInput');
     const vencimentoInput = document.getElementById('vencimentoInput');
 
     const numeroParcelasInput = document.getElementById('numParcelas');
@@ -68,12 +70,20 @@ export function initParcelamento() {
         gerarParcelas
     );
 
-    // console.log('botão gerar:', gerarParcelasBtn);
-
 
     addParcelaBtn?.addEventListener(
         'click',
         adicionarParcela
+    );
+
+    valorInput?.addEventListener(
+        'change',
+        atualizarValorConta
+    );
+
+    emissaoInput?.addEventListener(
+        'change',
+        atualizarDataEmissao
     );
 
 
@@ -135,6 +145,34 @@ export function initParcelamento() {
         renderResumo();
 
         renderTabela();
+
+    }
+
+    function recalcularParcelas(opcoes = {}) {
+
+        renumerarParcelas();
+
+        recalcularDatas(opcoes);
+
+        recalcularValores(opcoes);
+
+        atualizarVencimentoFinal();
+
+        render();
+        
+        console.log('depois do render', emissaoInput.value);
+
+    }
+
+    function atualizarVencimentoFinal() {
+
+        if (!parcelas.length) {
+            vencimentoInput.value = '';
+            return;
+        }
+
+        vencimentoInput.value =
+            parcelas[parcelas.length - 1].vencimento;
 
     }
 
@@ -219,7 +257,7 @@ export function initParcelamento() {
                 .map(renderLinha)
                 .join('');
 
-        initFlatpickr();
+        initFlatpickr("#parcelasBody .fp-date");
 
         bindTabelaEventos();
 
@@ -283,6 +321,12 @@ export function initParcelamento() {
 
         bindRemover();
 
+        bindValor();
+
+        bindDias();
+
+        bindData();
+
     }
 
     function bindRemover() {
@@ -296,6 +340,80 @@ export function initParcelamento() {
                     removerParcela(
                         Number(button.dataset.remove)
                     );
+
+                });
+
+            });
+
+    }
+
+    function bindValor() {
+
+        document
+            .querySelectorAll('.input-valor')
+            .forEach(input => {
+
+                input.addEventListener('change', () => {
+
+                    const index = Number(input.dataset.index);
+
+                    console.log('Index:', index);
+                    console.log('Digitado:', input.value);
+                    console.log('Parse:', parseCurrency(input.value));
+
+                    parcelas[index].valor = parseCurrency(input.value);
+
+                    console.log('Antes do recalculo:', JSON.parse(JSON.stringify(parcelas)));
+
+                    recalcularParcelas({
+                        manterIndice: index
+                    });
+
+                    console.log('Depois do recalculo:', JSON.parse(JSON.stringify(parcelas)));
+
+                });
+
+            });
+
+    }
+
+    function bindDias() {
+
+        document
+            .querySelectorAll('.input-dias')
+            .forEach(input => {
+
+                input.addEventListener('change', () => {
+
+                    const index = Number(input.dataset.index);
+
+                    parcelas[index].dias = Number(input.value);
+
+                    recalcularParcelas({
+                        atualizarData: index
+                    });
+
+                });
+
+            });
+
+    }
+
+    function bindData() {
+
+        document
+            .querySelectorAll('.input-data')
+            .forEach(input => {
+
+                input.addEventListener('change', () => {
+
+                    const index = Number(input.dataset.index);
+
+                    parcelas[index].vencimento = input.value;
+
+                    recalcularParcelas({
+                        atualizarDias: index
+                    });
 
                 });
 
@@ -334,16 +452,14 @@ export function initParcelamento() {
             return;
         }
 
-        const dataBase = new Date(
-            vencimentoInput.value + 'T00:00:00'
-        );
-
-
-        if (isNaN(dataBase)) {
+        if (!emissaoInput.value) {
+            emissaoInput.focus();
             return;
         }
 
-
+        const dataBase = new Date(
+            emissaoInput.value + 'T00:00:00'
+        );
 
         const valores = dividirValor(
             total,
@@ -371,14 +487,17 @@ export function initParcelamento() {
 
                 parcelas.push({
 
+                    id: crypto.randomUUID(),
+
                     numero: index + 1,
 
                     dias,
 
-                    vencimento:
-                        formatDateInput(vencimento),
+                    vencimento: formatDateInput(vencimento),
 
-                    valor
+                    valor,
+
+                    manual: false
 
                 });
 
@@ -386,73 +505,35 @@ export function initParcelamento() {
             }
         );
 
-        console.log(parcelas);
-
-        render();
+        recalcularParcelas();
 
     }
 
-    // ==========================
-    // Adicionar parcela manual
-    // ==========================
+    function atualizarValorConta() {
 
-    function adicionarParcela() {
+        if (!parcelas.length) {
+            return;
+        }
 
+        recalcularParcelas();
 
-        const ultima =
-            parcelas[parcelas.length - 1];
+    }
 
+    function atualizarDataEmissao() {
 
+        console.log('evento emissão:', emissaoInput.value);
 
-        parcelas.push({
+        if (!parcelas.length) {
+            return;
+        }
 
-            numero:
-                parcelas.length + 1,
-
-
-            dias:
-                ultima
-                    ? ultima.dias + 30
-                    : 0,
-
-
-            vencimento:
-                ultima
-                    ? formatDateInput(
-                        addDays(
-                            new Date(
-                                ultima.vencimento +
-                                'T00:00:00'
-                            ),
-                            30
-                        )
-                    )
-                    : vencimentoInput.value,
-
-
-            valor: ultima ? ultima.valor : 0
-
+        recalcularParcelas({
+            atualizarTodasDatas: true
         });
 
-
-
-        render();
-
-
     }
 
-    // ==========================
-    // Remover parcela
-    // ==========================
-
-    function removerParcela(index) {
-
-
-        parcelas.splice(
-            index,
-            1
-        );
-
+    function renumerarParcelas() {
 
         parcelas.forEach(
             (parcela, i) => {
@@ -462,8 +543,198 @@ export function initParcelamento() {
             }
         );
 
+    }
 
-        render();
+    function recalcularValores(opcoes = {}) {
+
+        const { manterIndice = null } = opcoes;
+
+        const totalConta = parseCurrency(valorInput.value);
+
+        // ==========================
+        // Caso 1
+        // Alterou o valor TOTAL da conta
+        // ==========================
+
+        if (manterIndice === null) {
+
+            const valores = dividirValor(
+                totalConta,
+                parcelas.length
+            );
+
+            parcelas.forEach((parcela, index) => {
+
+                parcela.valor = valores[index];
+
+            });
+
+            return;
+        }
+
+        // ==========================
+        // Caso 2
+        // Alterou uma parcela
+        // ==========================
+
+        const valorFixo = parcelas[manterIndice].valor;
+
+        const restante = totalConta - valorFixo;
+
+        const novosValores = dividirValor(
+            restante,
+            parcelas.length - 1
+        );
+
+        let contador = 0;
+
+        parcelas.forEach((parcela, index) => {
+
+            if (index === manterIndice) {
+                return;
+            }
+
+            parcela.valor = novosValores[contador++];
+
+        });
+
+    }
+
+    function recalcularDatas(opcoes = {}) {
+
+        console.log('data base:', emissaoInput.value);
+
+        const {
+            atualizarData = null,
+            atualizarDias = null,
+            atualizarTodasDatas = false
+        } = opcoes;
+
+        const dataBase = new Date(
+            emissaoInput.value + 'T00:00:00'
+        );
+
+        // Dias -> Data
+        if (atualizarData !== null) {
+
+            parcelas[atualizarData].vencimento =
+                formatDateInput(
+                    addDays(
+                        dataBase,
+                        parcelas[atualizarData].dias
+                    )
+                );
+
+        }
+
+        // Data -> Dias
+        if (atualizarDias !== null) {
+
+            const vencimento = new Date(
+                parcelas[atualizarDias].vencimento + 'T00:00:00'
+            );
+
+            const diferenca = Math.round(
+                (vencimento - dataBase) / 86400000
+            );
+
+            parcelas[atualizarDias].dias = diferenca;
+
+        }
+
+        if (atualizarTodasDatas) {
+
+            parcelas.forEach(parcela => {
+
+                parcela.vencimento = formatDateInput(
+                    addDays(
+                        dataBase,
+                        parcela.dias
+                    )
+                );
+
+            });
+
+        }
+
+    }
+
+    // ==========================
+    // Adicionar parcela manual
+    // ==========================
+
+    function calcularProximaParcela() {
+
+        if (!parcelas.length) {
+
+            return {
+                dias: 30,
+                vencimento: emissaoInput.value
+            };
+
+        }
+
+        const ultima = parcelas[parcelas.length - 1];
+
+        let intervalo = 30;
+
+        if (parcelas.length >= 2) {
+
+            const penultima = parcelas[parcelas.length - 2];
+
+            intervalo = ultima.dias - penultima.dias;
+
+            if (intervalo <= 0) {
+                intervalo = 30;
+            }
+
+        }
+
+        const dias = ultima.dias + intervalo;
+
+        const vencimento = formatDateInput(
+            addDays(
+                new Date(emissaoInput.value + 'T00:00:00'),
+                dias
+            )
+        );
+
+        return {
+            dias,
+            vencimento
+        };
+
+    }
+
+    function adicionarParcela() {
+
+        const proxima = calcularProximaParcela();
+
+        parcelas.push({
+
+            id: crypto.randomUUID(),
+
+            numero: parcelas.length + 1,
+
+            dias: proxima.dias,
+
+            vencimento: proxima.vencimento,
+
+            valor: 0,
+
+            manual: false
+
+        });
+
+        recalcularParcelas();
+
+    }
+
+    function removerParcela(index) {
+
+        parcelas.splice(index, 1);
+
+        recalcularParcelas();
 
     }
 

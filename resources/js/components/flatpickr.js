@@ -3,9 +3,9 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/themes/material_blue.css";
 import { Portuguese } from "flatpickr/dist/l10n/pt.js";
 
-export function initFlatpickr() {
+export function initFlatpickr(selector = ".fp-date") {
 
-    document.querySelectorAll(".fp-date").forEach(input => {
+    document.querySelectorAll(selector).forEach(input => {
 
         const config = {
 
@@ -30,10 +30,11 @@ export function initFlatpickr() {
         // COMPORTAMENTOS
         // ===========================
 
-        if (input.classList.contains("fp-today")) {
-
-            config.defaultDate = "today";
-
+        if (
+            input.classList.contains("fp-today") &&
+            !input.value
+        ) {
+            input.value = new Date().toISOString().substring(0, 10);
         }
 
         if (input.classList.contains("fp-future")) {

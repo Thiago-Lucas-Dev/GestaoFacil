@@ -13,15 +13,22 @@ export function formatCurrency(value) {
  */
 export function parseCurrency(value) {
 
-    if (!value) {
+    if (value === null || value === undefined || value === '') {
         return 0;
     }
 
-    return parseFloat(
+    if (typeof value === 'number') {
+        return value;
+    }
+
+    return Number(
         value
+            .toString()
+            .replace(/[^\d,-]/g, '')
             .replace(/\./g, '')
             .replace(',', '.')
     ) || 0;
+
 }
 
 /**

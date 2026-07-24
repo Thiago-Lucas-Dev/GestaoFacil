@@ -1,5 +1,10 @@
+import { consultarCnpj } from "../../api/receita";
+
 const drawer = document.getElementById('fornecedorDrawer');
 const backdrop = document.getElementById('fornecedorBackdrop');
+
+const form = document.getElementById('formFornecedor');
+const btnBuscar = document.getElementById("btnBuscarCnpj");
 
 function openDrawer() {
 
@@ -46,8 +51,6 @@ function initDrawer() {
 }
 
 function initSalvarFornecedor() {
-
-    const form = document.getElementById('formFornecedor');
 
     form.addEventListener('submit', async function (e) {
 
@@ -135,9 +138,69 @@ function initSalvarFornecedor() {
 
 }
 
+function initConsultaCnpj() {
+
+    const inputCnpj = form.querySelector('[name="cnpj"]');
+    const inputNome = form.querySelector('[name="nome"]');
+
+    if (!inputCnpj || !inputNome) {
+        return;
+    }
+
+    inputCnpj.addEventListener('blur', async () => {
+
+        const cnpj = inputCnpj.value.replace(/\D/g, '');
+
+        if (cnpj.length !== 14) {
+            return;
+        }
+
+        try {
+
+            btnBuscar.disabled = true;
+            btnBuscar.innerHTML = `
+                <span class="spinner-border spinner-border-sm"></span>
+            `;
+
+            const response = await fetch(`/api/consultar-cnpj?cnpj=${cnpj}`, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Erro ao consultar CNPJ.');
+            }
+
+            inputNome.value = data.razao_social;
+
+        } catch (error) {
+
+            showToast({
+                type: 'warning',
+                message: error.message
+            });
+
+        } finally {
+
+            btnBuscar.disabled = false;
+
+            btnBuscar.innerHTML = `
+                <i class="bi bi-search"></i>
+            `;
+
+        }
+
+    });
+
+}
+
 export function initModalFornecedor() {
 
     initDrawer();
+    initConsultaCnpj();
     initSalvarFornecedor();
 
 }

@@ -18,7 +18,9 @@ class StoreFornecedorRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        return parent::prepareForValidation();
+        $this->merge([
+            'cnpj' => preg_replace('/\D/', '', $this->cnpj),
+        ]);
     }
 
     public function rules(): array

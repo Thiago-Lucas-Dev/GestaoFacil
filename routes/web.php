@@ -4,16 +4,22 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 
+// MOVIMENTAÇÕES
 use App\Http\Controllers\Movimentacoes\MovimentacoesController;
 
+// CONFIGURAÇÕES
 use App\Http\Controllers\Configuracoes\ConfiguracoesController;
 use App\Http\Controllers\Configuracoes\ContaBancariaController;
 use App\Http\Controllers\Configuracoes\FormasPagamentoController;
 use App\Http\Controllers\Configuracoes\FormasRecebimentoController;
 use App\Http\Controllers\Configuracoes\CategoriasFinanceirasController;
 
+// CONTAS A PAGAR
 use App\Http\Controllers\ContasPagar\ContasPagarController;
 use App\Http\Controllers\ContasPagar\FornecedorController;
+
+// API
+use App\Http\Controllers\Api\ConsultaCnpjController;
 
 // ====================================
 // DASHBOARD
@@ -102,6 +108,19 @@ Route::middleware(['auth'])->group(function () {
                     Route::post('/', 'store')->name('store');
                 
                 });
+        });
+
+    // <!--================================
+    //      API
+    // =================================-->
+
+    Route::prefix('api')
+        ->name('api.')
+        ->group(function () {
+
+            Route::get('/consultar-cnpj', ConsultaCnpjController::class)
+                ->name('consultar-cnpj');
+
         });
 
     // ====================================

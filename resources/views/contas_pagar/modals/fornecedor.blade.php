@@ -71,7 +71,7 @@
 
                     <input type="text" name="cnpj" class="form-control fp-input" placeholder="00.000.000/0000-00">
 
-                    <button class="btn fp-btn-outline-secondary" type="button">
+                    <button id="btnBuscarCnpj" class="btn fp-btn-outline-secondary" type="button">
 
                         <i class="bi bi-search"></i>
 

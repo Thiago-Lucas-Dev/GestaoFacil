@@ -107,8 +107,13 @@
                                     <div class="col-md-6">
                                         <label class="fp-label">Data de Vencimento <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control fp-input fp-date"
-                                            placeholder="DD/MM/AAAA" id="vencimentoInput" required>
+                                        <input 
+                                            type="text" 
+                                            class="form-control fp-input fp-date"
+                                            placeholder="DD/MM/AAAA" 
+                                            id="vencimentoInput" 
+                                            data-min-from="#emissaoInput"
+                                            required>
                                     </div>
 
                                 </div>

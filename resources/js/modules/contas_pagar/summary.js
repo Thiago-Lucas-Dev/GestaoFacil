@@ -69,6 +69,29 @@ export function initSummary() {
 
     }
 
+    function atualizarResumoParcelamento(dados) {
+
+        if (!dados.ativo) {
+
+            esconderResumoParcelado();
+
+            return;
+
+        }
+
+        mostrarResumoParcelado();
+
+        summaryParcelas.textContent =
+            `${dados.quantidade}x`;
+
+        summaryProximoVencimento.textContent =
+            formatDateBR(dados.primeiraData);
+
+        summaryUltimoVencimento.textContent =
+            formatDateBR(dados.ultimaData);
+
+    }
+
     function esconderResumoParcelado() {
 
         summaryParcelado.classList.add('d-none');
@@ -192,6 +215,17 @@ export function initSummary() {
         (e) => {
 
             atualizarResumoRecorrencia(
+                e.detail
+            );
+
+        }
+    );
+
+    document.addEventListener(
+        'parcelamentoChanged',
+        (e) => {
+
+            atualizarResumoParcelamento(
                 e.detail
             );
 

@@ -42,10 +42,7 @@ export function initParcelamento() {
     // Proteção
     // ==========================
 
-    // console.log('iniciando parcelamento')
-
     if (!parcelaSwitch) {
-        // console.log('não achou parcelamento')
         return;
     }
 
@@ -103,31 +100,46 @@ export function initParcelamento() {
 
     function toggleParcelamento() {
 
-
         parcelaOptions?.classList.toggle(
             'd-none',
             !parcelaSwitch.checked
         );
 
-        if (parcelaSwitch.checked) {
+        const readonly = parcelaSwitch.checked;
 
-            console.log('Readonly ON')
+        vencimentoInput.readOnly = readonly;
 
-            vencimentoInput.readOnly = true;
+        if (vencimentoInput._flatpickr) {
 
-        } else {
+            const fp = vencimentoInput._flatpickr;
 
-            console.log('Readonly OFF')
+            fp.altInput.readOnly = readonly;
 
-            vencimentoInput.readOnly = false;
+            fp.set('clickOpens', !readonly);
+
+            if (readonly) {
+                fp.close();
+            }
 
         }
 
-
         if (!parcelaSwitch.checked) {
 
-
             parcelas = [];
+
+            document.dispatchEvent(
+
+                new CustomEvent('parcelamentoChanged', {
+
+                    detail: {
+
+                        ativo: false
+
+                    }
+
+                })
+
+            );
 
 
             parcelasWrap?.classList.add(
@@ -164,6 +176,45 @@ export function initParcelamento() {
 
     }
 
+    function atualizarResumoParcelamento() {
+
+        document.dispatchEvent(
+
+            new CustomEvent('parcelamentoChanged', {
+
+                detail: {
+
+                    ativo: parcelas.length > 0,
+
+                    quantidade: parcelas.length,
+
+                    primeiraData:
+                        parcelas[0]?.vencimento ?? null,
+
+                    ultimaData:
+                        parcelas[parcelas.length - 1]?.vencimento ?? null,
+
+                    valorTotal: parcelas.reduce(
+                        (total, parcela) => total + parcela.valor,
+                        0
+                    ),
+
+                    valorParcela:
+                        parcelas[0]?.valor ?? 0,
+
+                    valoresIguais:
+                        parcelas.every(
+                            p => p.valor === parcelas[0]?.valor
+                        )
+
+                }
+
+            })
+
+        );
+
+    }
+
     function recalcularParcelas(opcoes = {}) {
 
         renumerarParcelas();
@@ -178,17 +229,30 @@ export function initParcelamento() {
 
         render();
 
+        atualizarResumoParcelamento();
+
     }
 
     function atualizarVencimentoFinal() {
 
         if (!parcelas.length) {
-            vencimentoInput.value = '';
+
+            if (vencimentoInput._flatpickr) {
+                vencimentoInput._flatpickr.clear();
+            } else {
+                vencimentoInput.value = '';
+            }
+
             return;
         }
 
-        vencimentoInput.value =
-            parcelas[parcelas.length - 1].vencimento;
+        const data = parcelas[parcelas.length - 1].vencimento;
+
+        if (vencimentoInput._flatpickr) {
+            vencimentoInput._flatpickr.setDate(data, true);
+        } else {
+            vencimentoInput.value = data;
+        }
 
     }
 
@@ -238,19 +302,6 @@ export function initParcelamento() {
                 </div>
 
             </div>
-
-            <div class="cfr-ps-item">
-
-                <div class="cfr-ps-label">
-                    Por parcela
-                </div>
-
-                <div class="cfr-ps-val">
-                    ${formatCurrency(valorParcela)}
-                </div>
-
-            </div>
-
         `;
 
 

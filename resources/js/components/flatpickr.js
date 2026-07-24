@@ -49,7 +49,51 @@ export function initFlatpickr(selector = ".fp-date") {
 
         }
 
-        flatpickr(input, config);
+        // Evita criar múltiplas instâncias no mesmo input
+        if (input._flatpickr) {
+            input._flatpickr.destroy();
+        }
+
+        const minFromSelector = input.dataset.minFrom;
+
+        let minFromInput = null;
+
+        if (minFromSelector) {
+
+            minFromInput = document.querySelector(minFromSelector);
+
+            if (minFromInput?.value) {
+
+                config.minDate = minFromInput.value;
+            }
+
+        }
+
+        const fp = flatpickr(input, config);
+
+        // Atualiza a data mínima quando o campo origem mudar
+        if (minFromInput) {
+
+            minFromInput.addEventListener("change", () => {
+
+                fp.set("minDate", minFromInput.value);
+
+                // Se a data atual ficou inválida, limpa o campo
+                if (
+                    input.value &&
+                    input.value < minFromInput.value
+                ) {
+                    fp.clear();
+                }
+
+            });
+
+        }
+
+        // Mantém o readonly do input original
+        if (fp.altInput) {
+            fp.altInput.readOnly = input.readOnly;
+        }
 
     });
 
